@@ -1,0 +1,6 @@
+DecodeStage/testbench.vhd
+DecodeStage/mypackage.vhd
+DecodeStage/reg_file/reg_file.cr.mti
+DecodeStage/reg_file/reg_file.mpf
+DecodeStage/reg_file/vsim.wlf
+DecodeStage/reg_file/work/*
