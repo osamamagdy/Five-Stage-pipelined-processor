@@ -1,10 +1,27 @@
-D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd
+D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/memory_stage.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/memory_stage.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity memory_stage
+-- Compiling architecture mem_arch of memory_stage
+
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Compiling entity CU
 -- Compiling architecture my_CU of CU
+
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/mux_41.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/mux_41.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity mux_41
+-- Compiling architecture mux_41_structure of mux_41
 
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -21,6 +38,14 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Loading package std_logic_1164
 -- Compiling entity my_nDFF
 -- Compiling architecture b_my_nDFF of my_nDFF
+
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/4x2mux.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/4x2mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux4x1
+-- Compiling architecture arch_mux4x1 of mux4x1
 
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/ExecutionStage.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/ExecutionStage.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -44,6 +69,23 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Loading entity my_nDFF
 -- Loading entity my_DFF
 
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/IF-ID_BUFFER.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/IF-ID_BUFFER.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity IFID_BUFFER
+-- Compiling architecture StructIFID_BUFFER of IFID_BUFFER
+
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/units.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/units.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity CheckImmediate
+-- Compiling architecture CheckImmediate_Struct of CheckImmediate
+
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/ALU.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/ALU.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
@@ -61,6 +103,14 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling architecture a_my_DFF of my_DFF
 -- Compiling entity TRI
 -- Compiling architecture TRI_State of TRI
+
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity write_back_stage
+-- Compiling architecture arch_write_back_stage of write_back_stage
 
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -87,6 +137,14 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling entity nTRI
 -- Compiling architecture my_nTRI of nTRI
 
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/2x1Mux.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/2x1Mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux2x1
+-- Compiling architecture arch_mux2x1 of mux2x1
+
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/NBitAdder.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/NBitAdder.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
@@ -94,6 +152,14 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Loading package std_logic_1164
 -- Compiling entity my_nadder
 -- Compiling architecture a_my_nadder of my_nadder
+
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/mem_wb_buffer.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/memory_and_wb/mem_wb_buffer.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mem_wb_buffer
+-- Compiling architecture arch_mem_wb_buffer of mem_wb_buffer
 
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/1BitAdder.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/1BitAdder.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -103,6 +169,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling entity my_adder
 -- Compiling architecture a_my_adder of my_adder
 
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/instructions_mem.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/instructions_mem.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Compiling entity instruction_mem
+-- Compiling architecture instruction_mem_arch of instruction_mem
+
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/reg_file.vhdl {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/reg_file.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
@@ -110,6 +186,15 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Loading package std_logic_1164
 -- Compiling entity reg_file
 -- Compiling architecture my_reg_file of reg_file
+
+} {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/mux_21.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/Fetch/mux_21.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity mux_21
+-- Compiling architecture mux_21_structure of mux_21
 
 } {} {}} D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/ALUwithFlags.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/ALUwithFlags/ALUwithFlags.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
