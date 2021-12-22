@@ -85,7 +85,7 @@ ENTITY myDecode IS
     MEM_ADD : OUT STD_LOGIC;
     SP_OP : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     SP_NUM : OUT STD_LOGIC;
-    WB : OUT STD_LOGIC;
+    WB : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     MEM : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     EX : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
     RTI : OUT STD_LOGIC;
@@ -105,8 +105,8 @@ SIGNAL mux_4_selector : std_logic;
 SIGNAL mux_10_selector : std_logic;
 SIGNAL OR_gate_out : STD_LOGIC;
 SIGNAL OR_gate_in : STD_LOGIC;
-SIGNAL CONTROL_SIGNALS : STD_LOGIC_VECTOR(16 DOWNTO 0);
-SIGNAL Buffer_Input : STD_LOGIC_VECTOR(16 DOWNTO 0);
+SIGNAL CONTROL_SIGNALS : STD_LOGIC_VECTOR(17 DOWNTO 0);
+SIGNAL Buffer_Input : STD_LOGIC_VECTOR(17 DOWNTO 0);
 SIGNAL second_operand : STD_LOGIC_VECTOR (15 DOWNTO 0);
 SIGNAL RS_DATA : STD_LOGIC_VECTOR (15 DOWNTO 0);
 
@@ -144,7 +144,7 @@ myCU : entity work.CU port map(
 
 OR_gate_out <= (OR_gate_in OR IS_HAZARD);
 
-myMux4 : entity work.mux2 GENERIC MAP (17) port map(
+myMux4 : entity work.mux2 GENERIC MAP (18) port map(
     sel => OR_gate_out,
     in0 =>CONTROL_SIGNALS,
     in1 => (OTHERS => '0'),

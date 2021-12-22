@@ -23,7 +23,8 @@ port(
 	-- memory write enable
 	mem_write: in std_logic;
 	-- stack adder/sub input to choose to pop or push (add or sub)
-	sp_op: in std_logic;
+	-- sp[1] -> mux 16, sp[0] -> alu/sun
+	sp_op: in std_logic_vector(1 downto 0);
 	-- Mux 11 selector : to choose to add/sub 2 or 1 to the sp
 	sp_num: in std_logic;
 	-- input to mux 12: to enter the memory

@@ -10,7 +10,7 @@ ENTITY ExecutionStage IS
         memAddressin : IN STD_LOGIC;
         PCin : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         nextPCin : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SPOPin : IN STD_LOGIC;
+        SPOPin : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         SPNUMin : IN STD_LOGIC;
         WBin : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         MEM : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -24,7 +24,6 @@ ENTITY ExecutionStage IS
         rtAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
         RETin : IN STD_LOGIC;
         EXflush : IN STD_LOGIC;
-        Rsrc1in : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 
         -- Outputs
         memValueout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -33,9 +32,9 @@ ENTITY ExecutionStage IS
         WBout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         MemRe : OUT STD_LOGIC;
         MemWr : OUT STD_LOGIC;
-        SPOPout : OUT STD_LOGIC;
+        SPOPout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         SPNUMout : OUT STD_LOGIC;
-        Rsrc1out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+        Rsrc1 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
         RTIout : OUT STD_LOGIC;
         RETout : OUT STD_LOGIC;
         PCout : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -95,9 +94,9 @@ BEGIN
             WBout <= (OTHERS => '0');
             MemRe <= '0';
             MemWr <= '0';
-            SPOPout <= '0';
+            SPOPout <= (OTHERS => '0');
             SPNUMout <= '0';
-            Rsrc1out <= (OTHERS => '0');
+            Rsrc1 <= (OTHERS => '0');
             RTIout <= '0';
             RETout <= '0';
             PCout <= (OTHERS => '0');
@@ -108,11 +107,11 @@ BEGIN
             memAddressout <= memAddressin;
             nextPCout <= nextPCin;
             WBout <= WBin;
-            MemRe <= MEMtemp(0);
-            MemWr <= MEMtemp(1);
+            MemRe <= MEMtemp(1);
+            MemWr <= MEMtemp(0);
             SPOPout <= SPOPin;
             SPNUMout <= SPNUMin;
-            Rsrc1out <= Rsrc1in;
+            Rsrc1 <= RSdata;
             RTIout <= RTIin;
             RETout <= RETin;
             PCout <= PCin;
