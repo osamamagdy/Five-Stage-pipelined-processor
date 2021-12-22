@@ -15,7 +15,7 @@ ENTITY fetch IS
         MUX1_SEL    : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         HLT         : IN STD_LOGIC;
         --
-        MO_1 : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+        MO_1 : IN STD_LOGIC_VECTOR(N-1 DOWNTO 0);
         --
         pcOut      : OUT STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
         next_pcout : OUT STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
@@ -67,7 +67,7 @@ ARCHITECTURE fetch_structure OF fetch IS
     COMPONENT PC_REGISTER IS
         PORT (
             D                : IN STD_LOGIC_VECTOR (N - 1 DOWNTO 0);
-            CLK, RST, ENABLE : IN STD_LOGIC;
+            CLK, RST, HLT : IN STD_LOGIC;
             Q                : OUT STD_LOGIC_VECTOR (N - 1 DOWNTO 0)
         );
     END COMPONENT;
@@ -83,9 +83,9 @@ BEGIN
 
     ------------------- PC --------------------------------
     PC : PC_REGISTER GENERIC MAP(N) PORT MAP(MUX2_PC, CLK, reset, HLT, REG_PC);
-
+    pcOut <= REG_PC;
     ------------- INSTUCTION MEMORY -----------------------
-    INSTRUC_MEM : instruction_mem GENERIC MAP(N) PORT MAP(REG_PC, CLK, IRTEMP);
+    INSTRUC_MEM : instruction_mem PORT MAP(REG_PC, CLK, IRTEMP);
     IR <= IRTEMP;
 
     IMM_CHECK : CheckImmediate GENERIC MAP(N) PORT MAP(REG_PC, IRTEMP, PcIn);
