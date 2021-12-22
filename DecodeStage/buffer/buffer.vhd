@@ -57,7 +57,7 @@ ENTITY ID_Buffer IS
     Clk, rst : IN STD_LOGIC;
 
     --------Inputs
-    Control_Signal : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
+    Control_Signal : IN STD_LOGIC_VECTOR(17 DOWNTO 0);
     IN_PC : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     IN_NEXT_PC : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
     IN_RS_DATA : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
@@ -80,7 +80,7 @@ ENTITY ID_Buffer IS
     MEM_ADD : OUT STD_LOGIC;
     SP_OP : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     SP_NUM : OUT STD_LOGIC;
-    WB : OUT STD_LOGIC;
+    WB : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     MEM : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     EX : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
     RTI : OUT STD_LOGIC;
@@ -92,13 +92,14 @@ END ID_Buffer;
 ARCHITECTURE my_Buffer OF ID_Buffer IS
 BEGIN
     ------They have the same Clk, Rst, en bit as we want to move the entire 32-bit together
-    myMem_Value : ENTITY work.my_nDFF GENERIC MAP (2) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(16 DOWNTO 15), q => MEM_VAL);
-    myMem_Address : ENTITY work.my_DFF PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(14), q => MEM_ADD);
+    myMem_Value : ENTITY work.my_nDFF GENERIC MAP (2) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(17 DOWNTO 16), q => MEM_VAL);
+    myMem_Address : ENTITY work.my_DFF PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(15), q => MEM_ADD);
     myPC : ENTITY work.my_nDFF GENERIC MAP (32) PORT MAP(Clk => Clk, rst => rst, d =>IN_PC, q => OUT_PC);
     myNext_Pc : ENTITY work.my_nDFF GENERIC MAP (32) PORT MAP(Clk => Clk, rst => rst, d =>IN_NEXT_PC, q => OUT_NEXT_PC);
-    mySp_Op : ENTITY work.my_nDFF GENERIC MAP (2) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(13 DOWNTO 12), q => SP_OP);
-    mySp_Num : ENTITY work.my_DFF PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(11), q => SP_NUM);
-    myWb : ENTITY work.my_DFF PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(10), q => WB);
+    mySp_Op : ENTITY work.my_nDFF GENERIC MAP (2) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(14 DOWNTO 13), q => SP_OP);
+    mySp_Num : ENTITY work.my_DFF PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(12), q => SP_NUM);
+    ---
+    myWb : ENTITY work.my_nDFF GENERIC MAP(2) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(11 DOWNTO 10), q => WB);
     myMem : ENTITY work.my_nDFF GENERIC MAP (2) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(9 DOWNTO 8), q => MEM);
     myEx : ENTITY work.my_nDFF GENERIC MAP (4) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(7 DOWNTO 4), q => EX);
     myRS_DATA : ENTITY work.my_nDFF GENERIC MAP (16) PORT MAP(Clk => Clk, rst => rst, d =>IN_RS_DATA, q => OUT_RS_DATA);
