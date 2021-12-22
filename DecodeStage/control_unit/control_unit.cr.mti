@@ -1,0 +1,9 @@
+D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity CU
+-- Compiling architecture my_CU of CU
+
+} {} {}}

@@ -1,9 +1,0 @@
-DecodeStage/testbench.vhd
-DecodeStage/mypackage.vhd
-*.cr.mti
-*.mpf
-*.wlf
-DecodeStage/reg_file/work/*
-DecodeStage/control_unit/work/*
-DecodeStage/buffer/work/*
-DecodeStage/work/*

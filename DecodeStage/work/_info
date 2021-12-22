@@ -1,0 +1,446 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/buffer
+Ecu
+Z0 w1640184234
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z3 dD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage
+Z4 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd
+Z5 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd
+l0
+L4
+VQmlF44egQakS4W<A6MHJM3
+!s100 lO;6[mFaN>Ri]oOKdhJNa0
+Z6 OV;C;10.5b;63
+32
+Z7 !s110 1640184408
+!i10b 1
+Z8 !s108 1640184408.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd|
+Z10 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd|
+!i113 1
+Z11 o-work work -2002 -explicit
+Z12 tExplicit 1 CvgOpt 0
+Amy_cu
+R1
+R2
+Z13 DEx4 work 2 cu 0 22 QmlF44egQakS4W<A6MHJM3
+l21
+L20
+VcW6nM8G]85bnAjZT78k1Z2
+!s100 >5H1liX_9P[5`m4><oYL`0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Edecoder
+Z14 w1640074568
+R1
+R2
+R3
+Z15 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl
+Z16 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl
+l0
+L4
+Vo2h1I]5KGnjfAd48R]oXW1
+!s100 ?:V`AUM22E18`cIMKdlZ<2
+R6
+32
+R7
+!i10b 1
+R8
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl|
+Z18 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl|
+!i113 1
+R11
+R12
+Amy_decoder
+R1
+R2
+DEx4 work 7 decoder 0 22 o2h1I]5KGnjfAd48R]oXW1
+l10
+L9
+VMR94l^k>ABnoJDWFV1Qb91
+!s100 QZOA74eh2KU_ZUKNU<GGY2
+R6
+32
+R7
+!i10b 1
+R8
+R17
+R18
+!i113 1
+R11
+R12
+Eid_buffer
+Z19 w1640173325
+R1
+R2
+R3
+Z20 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/buffer/buffer.vhd
+Z21 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/buffer/buffer.vhd
+l0
+L55
+V>SCjbUfo;JgUozU<B`Tb31
+!s100 NeLJ@T_YoCoBjjF;WeTPf0
+R6
+32
+R7
+!i10b 1
+R8
+Z22 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/buffer/buffer.vhd|
+Z23 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/buffer/buffer.vhd|
+!i113 1
+R11
+R12
+Amy_buffer
+DEx4 work 6 my_dff 0 22 oMRgBE?W78]fLhV6fijaC2
+DEx4 work 7 my_ndff 0 22 hb;Njhza4gc@Q]QZmRcJ?1
+R1
+R2
+Z24 DEx4 work 9 id_buffer 0 22 >SCjbUfo;JgUozU<B`Tb31
+l93
+L92
+Vg;i2TmG0VZle8lV5Ae]Fd0
+!s100 VdBdAI9DQ<A0cPz]=dR;J0
+R6
+32
+R7
+!i10b 1
+R8
+R22
+R23
+!i113 1
+R11
+R12
+Emux2
+Z25 w1640184320
+R1
+R2
+R3
+Z26 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd
+Z27 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd
+l0
+L27
+VoP3=5FPO3eTX`o[k]Wi6e3
+!s100 NS7Mnh>d3aXzBIgQ2RN1G2
+R6
+32
+R7
+!i10b 1
+R8
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd|
+Z29 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd|
+!i113 1
+R11
+R12
+Amodel_mux2
+R1
+R2
+Z30 DEx4 work 4 mux2 0 22 oP3=5FPO3eTX`o[k]Wi6e3
+l36
+L35
+VU=@KlS]c]A_:HnS9oBI1=2
+!s100 674MC2_VEZUCdjZ0<b[ZV3
+R6
+32
+R7
+!i10b 1
+R8
+R28
+R29
+!i113 1
+R11
+R12
+Emux4
+R25
+R1
+R2
+R3
+R26
+R27
+l0
+L6
+V?9_KgDJoDIb]`<2=JVg;X2
+!s100 _zO7GK=NIAE@zhIJ<T8bz3
+R6
+32
+R7
+!i10b 1
+R8
+R28
+R29
+!i113 1
+R11
+R12
+Amodel_mux4
+R1
+R2
+Z31 DEx4 work 4 mux4 0 22 ?9_KgDJoDIb]`<2=JVg;X2
+l14
+L13
+VfoY2d<gibEl;0SCKC57iI1
+!s100 H657:S^?z5WN9egcB`kD;0
+R6
+32
+R7
+!i10b 1
+R8
+R28
+R29
+!i113 1
+R11
+R12
+Emy_dff
+Z32 w1640074246
+R1
+R2
+R3
+Z33 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/utils.vhd
+Z34 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/utils.vhd
+l0
+L6
+VL[a<FJA[feXkbX5EfRAJG3
+!s100 QPET6=0g;5HR0z]:WIhBQ0
+R6
+32
+R7
+!i10b 1
+R8
+Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/utils.vhd|
+Z36 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/utils.vhd|
+!i113 1
+R11
+R12
+Aa_my_dff
+R1
+R2
+DEx4 work 6 my_dff 0 22 L[a<FJA[feXkbX5EfRAJG3
+l14
+L12
+VJC0Ud<?HdE12[RGY8X??02
+!s100 c3F2L4Ne9UbE3i_UKl<Ci1
+R6
+32
+R7
+!i10b 1
+R8
+R35
+R36
+!i113 1
+R11
+R12
+Emy_ndff
+Z37 w1640074238
+R1
+R2
+R3
+Z38 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/register_32.vhdl
+Z39 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/register_32.vhdl
+l0
+L4
+V7aYAITgA^8g3ENO]?X6ck2
+!s100 jWhL3D<edU]4__8MK>@572
+R6
+32
+R7
+!i10b 1
+R8
+Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/register_32.vhdl|
+Z41 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/register_32.vhdl|
+!i113 1
+R11
+R12
+Ab_my_ndff
+R1
+R2
+DEx4 work 7 my_ndff 0 22 7aYAITgA^8g3ENO]?X6ck2
+l17
+L11
+ViX:<X>9f46I1NL?kca;<O0
+!s100 d3k:WE::MGjOLJYAXG:M32
+R6
+32
+R7
+!i10b 1
+R8
+R40
+R41
+!i113 1
+R11
+R12
+Emydecode
+R25
+R1
+R2
+R3
+R26
+R27
+l0
+L48
+V_XG;z?>eZ16WF_cPf27e^1
+!s100 ldCP]oci<3MIOc6la>1`X2
+R6
+32
+R7
+!i10b 1
+R8
+R28
+R29
+!i113 1
+R11
+R12
+Amy_decode
+R24
+R31
+R30
+R13
+Z42 DEx4 work 8 reg_file 0 22 H>Z?JSNDbH;4cbOTMR;]G2
+R1
+R2
+DEx4 work 8 mydecode 0 22 _XG;z?>eZ16WF_cPf27e^1
+l113
+L98
+VEfK0:cF5@`=MIML?T19CJ1
+!s100 PUUnljczz[LAz[3jjFaPK3
+R6
+32
+R7
+!i10b 1
+R8
+R28
+R29
+!i113 1
+R11
+R12
+Entri
+Z43 w1640074241
+R1
+R2
+R3
+Z44 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl
+Z45 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl
+l0
+L4
+VFN?zf4ZeF]Wmdz4U2DT=n3
+!s100 nL`CWBJYYSIJ50`jM42]C3
+R6
+32
+R7
+!i10b 1
+R8
+Z46 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl|
+Z47 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl|
+!i113 1
+R11
+R12
+Amy_ntri
+R1
+R2
+Z48 DEx4 work 4 ntri 0 22 FN?zf4ZeF]Wmdz4U2DT=n3
+l17
+L11
+Z49 V2HW3NIZEe3OlM1AQiim^B0
+Z50 !s100 oD0PGBOf=d1:PJ<EN>`kS1
+R6
+32
+R7
+!i10b 1
+R8
+R46
+R47
+!i113 1
+R11
+R12
+Ereg_file
+Z51 w1640074480
+R1
+R2
+R3
+Z52 8D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/reg_file.vhdl
+Z53 FD:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/reg_file.vhdl
+l0
+L5
+VH>Z?JSNDbH;4cbOTMR;]G2
+!s100 L<_kO^AKJXBTmWLO[Kc_M0
+R6
+32
+R7
+!i10b 1
+R8
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/reg_file.vhdl|
+Z55 !s107 D:/Work/College/Third_Year/Computer_Arch/Project/Five-Stage-pipelined-processor/DecodeStage/reg_file/reg_file.vhdl|
+!i113 1
+R11
+R12
+Amy_reg_file
+R1
+R2
+R42
+l50
+L16
+VQTN84l5BzfCNoZhSNNJ:Q3
+!s100 NCZ=EWiA]OUm3LgjS_99E3
+R6
+32
+R7
+!i10b 1
+R8
+R54
+R55
+!i113 1
+R11
+R12
+Etri
+R32
+R1
+R2
+R3
+R33
+R34
+l0
+L27
+VH05@9k[OP2?njzX]C?XbB1
+!s100 2obWTSNK4?:d[iC[3>ma01
+R6
+32
+R7
+!i10b 1
+R8
+R35
+R36
+!i113 1
+R11
+R12
+Atri_state
+R1
+R2
+DEx4 work 3 tri 0 22 H05@9k[OP2?njzX]C?XbB1
+l35
+L33
+Vgk]3mX>8Ok9BQb_HAY7N[2
+!s100 ]N4c_DL2N44XzU=L41hAZ0
+R6
+32
+R7
+!i10b 1
+R8
+R35
+R36
+!i113 1
+R11
+R12
