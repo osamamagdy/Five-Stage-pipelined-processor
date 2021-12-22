@@ -44,7 +44,7 @@ force -freeze sim:/memory_stage/next_pc 00000000000000000000000000000000 0
 force -freeze sim:/memory_stage/wb 00 0
 force -freeze sim:/memory_stage/mem_read 0 0
 force -freeze sim:/memory_stage/mem_write 0 0
-force -freeze sim:/memory_stage/sp_op 0 0
+force -freeze sim:/memory_stage/sp_op 00 0
 force -freeze sim:/memory_stage/sp_num 0 0
 force -freeze sim:/memory_stage/r_src1 0000000000000000 0
 force -freeze sim:/memory_stage/alu_res 0000000000000000 0
