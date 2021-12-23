@@ -239,7 +239,7 @@ MEM_Stage : memory_stage PORT MAP(
 WB_Stage : write_back_stage PORT MAP(
 	-- inputs
         clk,
-	out_port_en,
+	output_port_en,
 	wb_input,
 	-- output 
 	rd_data,
