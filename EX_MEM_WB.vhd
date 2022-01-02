@@ -22,6 +22,9 @@ ENTITY EX_MEM_WB IS
         rtAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
         RETin : IN STD_LOGIC;
         EXflush : IN STD_LOGIC;
+        flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+        -- jump
+        jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         flush_mem_Wb : IN STD_LOGIC;
 	-- from control unit
 	out_port_en: IN STD_LOGIC;
@@ -184,8 +187,6 @@ ARCHITECTURE arch OF EX_MEM_WB IS
     SIGNAL PCout :  STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL rdAddressout :  STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL ALUres :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL flags :  STD_LOGIC_VECTOR(2 DOWNTO 0);
-    SIGNAL jumpAddress :  STD_LOGIC_VECTOR(31 DOWNTO 0);
 
     SIGNAL wb_en :  STD_LOGIC;
     SIGNAL alu_mem_output :  STD_LOGIC;
