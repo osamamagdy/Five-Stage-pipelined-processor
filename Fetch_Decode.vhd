@@ -48,7 +48,8 @@ ENTITY Fetch_Decode IS
         EX          : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
         RTI         : OUT STD_LOGIC;
         BACKUP_FLAG : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-        RET         : OUT STD_LOGIC
+        RET         : OUT STD_LOGIC ;
+        OUT_PORT_EN : OUT STD_LOGIC
 
     );
 END Fetch_Decode;
@@ -135,7 +136,8 @@ BEGIN
         EX          => EX,
         RTI         => RTI,
         BACKUP_FLAG => BACKUP_FLAG,
-        RET         => RET
+        RET         => RET,
+        OUT_PORT_EN => OUT_PORT_EN
     );
 
 END ARCHITECTURE;
