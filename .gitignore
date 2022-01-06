@@ -1,2 +1,6 @@
 work/
 DecodeStage/buffer/buffer.vhd.bak
+DecodeStage/decode.cr.mti
+DecodeStage/decode.do
+DecodeStage/decode.mpf
+DecodeStage/vsim.wlf
