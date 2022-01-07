@@ -1,5 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
+USE work.ALL;
+
 ENTITY Processor IS
     PORT (
         reset : IN STD_LOGIC;
@@ -9,197 +11,132 @@ ENTITY Processor IS
 END Processor;
 
 ARCHITECTURE arch OF Processor IS
-    COMPONENT EX_MEM_WB IS
-        PORT (
-            clk : IN STD_LOGIC;
-            reset : IN STD_LOGIC;
-            memValuein : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-            memAddressin : IN STD_LOGIC;
-            PCin : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            nextPCin : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            SPOPin : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-            SPNUMin : IN STD_LOGIC;
-            WBin : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-            MEM : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-            EX : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-            RSdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-            secondOperand : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-            RTIin : IN STD_LOGIC;
-            BackupFlag : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-            rdAddressin : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-            rsAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-            rtAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-            RETin : IN STD_LOGIC;
-            EXflush : IN STD_LOGIC;
-            flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
-            -- jump
-            jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-            flush_mem_Wb : IN STD_LOGIC;
-            -- from control unit
-            out_port_en : IN STD_LOGIC;
-            -- Outputs
-            -- 
-            -- output of mux 4
-            rd_data : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-            -- from alu result data
-            output_port : OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
-        );
-    END COMPONENT;
 
-    COMPONENT Fetch_Decode IS
-        PORT (
+        ----------------- Out From Decode-------------------------
+        SIGNAL OUT_PC       : STD_LOGIC_VECTOR (31 DOWNTO 0);
+        SIGNAL OUT_NEXT_PC  : STD_LOGIC_VECTOR (31 DOWNTO 0);
+        SIGNAL OUT_RS_DATA  : STD_LOGIC_VECTOR (15 DOWNTO 0);
+        SIGNAL OUT_SEC_OP   : STD_LOGIC_VECTOR (15 DOWNTO 0);
+        SIGNAL OUT_RD_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL OUT_RS_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL OUT_RT_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL OUT_EX_FLUSH : STD_LOGIC;
 
-            reset : IN STD_LOGIC;
-            clk : IN STD_LOGIC;
-            ----------------Decode inputs from outside -----------------
-            IS_EXCEPTION, IN_RET, IN_RTI, IS_HAZARD : IN STD_LOGIC;
+        -------Outputs from Control register-------------------
+        SIGNAL MEM_VAL     : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL MEM_ADD     : STD_LOGIC;
+        SIGNAL SP_OP       : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL SP_NUM      : STD_LOGIC;
+        SIGNAL WB          : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL MEM         : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL EX          : STD_LOGIC_VECTOR(3 DOWNTO 0);
+        SIGNAL RTI         : STD_LOGIC;
+        SIGNAL BACKUP_FLAG : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL RET         : STD_LOGIC ;
+        SIGNAL OUT_PORT_EN : STD_LOGIC ;
 
-            IN_PORT : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        -------Outputs From EX_MEM_WB Stage---------------------
+        SIGNAL flags : STD_LOGIC_VECTOR(2 DOWNTO 0);
+        SIGNAL jumpAddress : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        -- output of mux 4
+        SIGNAL rd_data: std_logic_vector ( 15 downto 0);
+        -- from alu result data
+    
 
-            Write_Address : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
-
-            Write_Value : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
-
-            Write_EN : IN STD_LOGIC;
-
-            Flag_Reg : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
-
-            -------------------Fetch inputs from outside-----------------------------
-
-            JumpAddress : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            Exception : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            Stack : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-
-            MO_1 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            --
-            ----------------- Out From Decode-------------------------
-            OUT_PC : OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
-            OUT_NEXT_PC : OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
-            OUT_RS_DATA : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-            OUT_SEC_OP : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-            OUT_RD_ADD : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
-            OUT_RS_ADD : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
-            OUT_RT_ADD : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
-            OUT_EX_FLUSH : OUT STD_LOGIC;
-
-            -------Outputs from Control register
-            MEM_VAL : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-            MEM_ADD : OUT STD_LOGIC;
-            SP_OP : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-            SP_NUM : OUT STD_LOGIC;
-            WB : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-            MEM : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-            EX : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-            RTI : OUT STD_LOGIC;
-            BACKUP_FLAG : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-            RET : OUT STD_LOGIC
-
-        );
-    END COMPONENT;
-
-    SIGNAL memValue : STD_LOGIC_VECTOR(1 DOWNTO 0);
-    SIGNAL memAddress : STD_LOGIC;
-    SIGNAL PC : STD_LOGIC_VECTOR(31 DOWNTO 0);
-    SIGNAL nextPC : STD_LOGIC_VECTOR(31 DOWNTO 0);
-    SIGNAL SPOP : STD_LOGIC_VECTOR(1 DOWNTO 0);
-    SIGNAL SPNUM : STD_LOGIC;
-    SIGNAL WB : STD_LOGIC_VECTOR(1 DOWNTO 0);
-    SIGNAL MEM : STD_LOGIC_VECTOR(1 DOWNTO 0);
-    SIGNAL EX : STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL RSdata : STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL secondOperand : STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL RTI : STD_LOGIC;
-    SIGNAL BackupFlag : STD_LOGIC_VECTOR(1 DOWNTO 0);
-    SIGNAL rdAddress : STD_LOGIC_VECTOR(2 DOWNTO 0);
-    SIGNAL rsAddress : STD_LOGIC_VECTOR(2 DOWNTO 0);
-    SIGNAL rtAddress : STD_LOGIC_VECTOR(2 DOWNTO 0);
-    SIGNAL RET : STD_LOGIC;
-    SIGNAL EXflush : STD_LOGIC;
-    SIGNAL flags : STD_LOGIC_VECTOR(2 DOWNTO 0);
-    SIGNAL jumpAddress : STD_LOGIC_VECTOR(31 DOWNTO 0);
 BEGIN
-    EX_MEM_WB_Stages : EX_MEM_WB PORT MAP(
-        clk,
-        reset,
-        memValue,
-        memAddress,
-        PC,
-        nextPC,
-        SPOP,
-        SPNUM,
-        WB,
-        MEM,
-        EX,
-        RSdata,
-        secondOperand,
-        RTI,
-        BackupFlag,
-        rdAddress,
-        rsAddress,
-        rtAddress,
-        RET,
-        flags,
-        jumpAddress,
-        EXflush,
+    EX_MEM_WB_Stages : ENTITY work.EX_MEM_WB PORT MAP(
+        clk => clk,
+        reset => reset,
+        memValuein => MEM_VAL,
+        memAddressin => MEM_ADD ,
+        PCin => OUT_PC,
+        nextPCin => OUT_NEXT_PC ,
+        SPOPin => SP_OP,
+        SPNUMin => SP_NUM,
+        WBin => WB ,
+        MEM => MEM ,
+        EX => EX ,
+        RSdata => OUT_RS_DATA ,
+        secondOperand => OUT_SEC_OP ,
+        RTIin => RTI ,
+        BackupFlag => BACKUP_FLAG ,
+        rdAddressin => OUT_RD_ADD ,
+        rsAddress => OUT_RS_ADD ,
+        rtAddress => OUT_RT_ADD ,
+        RETin => RET ,
+        EXflush => OUT_EX_FLUSH ,
+        flags => flags ,     --OUT
+        jumpAddress => jumpAddress ,    --OUT
 
         -- Replace These with correct signals
         -- 
         -- 
-        flush_mem_Wb : IN STD_LOGIC;
+        flush_mem_Wb => '0' , --As there is no case to flush the Write back buffer (exceptions happen in the Execute stage not after)
         -- from control unit
-        out_port_en : IN STD_LOGIC;
+        out_port_en => OUT_PORT_EN, --Input
         -- Outputs
         -- 
         -- output of mux 4
-        rd_data : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
+        rd_data => rd_data,
         -- from alu result data
-        output_port
+        output_port => output_port
     );
-    Fetch_Decode_Stages : Fetch_Decode PORT MAP(
 
-        reset,
-        clk,
+    Fetch_Decode_Stages : ENTITY work.Fetch_Decode PORT MAP(
+
+
+        reset => reset,
+        clk   => clk ,
         ----------------Decode inputs from outside -----------------
-        IS_EXCEPTION, IN_RET, IN_RTI, IS_HAZARD : IN STD_LOGIC;
+        
+        IS_EXCEPTION => '0' ,   -----------?????????????????From Exception Unit when implemented 
+        
+        IN_RET => '0' ,         ----------------??????????????   Not implemented yet
+        
+        IN_RTI => '0' ,         ---------------????????????? Not implemented yet
+        
+        IS_HAZARD => '0' ,      ---------------???????????? Came From Hazard Detection Unit
 
-        IN_PORT,
+        IN_PORT => IN_PORT ,
 
-        Write_Address : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+        Write_Address => (OTHERS => '0' )  , --------------??????????? NOT implemented yet
 
-        Write_Value : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+        Write_Value =>      (OTHERS => '0' )  ,  ----------------?????????????? NOT implemented yet  ,
 
-        Write_EN : IN STD_LOGIC;
+        Write_EN =>     '0'  ,      ----------------???????????? NOT implemented yet,
 
-        flags,
+        Flag_Reg =>  flags,
 
         -------------------Fetch inputs from outside-----------------------------
 
-        jumpAddress,
-        Exception : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        Stack : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        JumpAddress => jumpAddress ,
+        Exception   => (OTHERS => '0' ),        -------????????????NOT yet implemented, came from Exception unit
+        Stack       => (OTHERS => '0' ),        -------????????????NOT yet implemented, came from Memory
 
-        MO_1 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        MO_1 => (OTHERS => '0' ),               ------?????????????????NOT Used
         --
         ----------------- Out From Decode-------------------------
-        PC,
-        nextPC,
-        RSdata,
-        secondOperand,
-        rdAddress,
-        rsAddress,
-        rtAddress,
-        EXflush,
+        OUT_PC       => OUT_PC       ,
+        OUT_NEXT_PC  => OUT_NEXT_PC   ,
+        OUT_RS_DATA  => OUT_RS_DATA   ,
+        OUT_SEC_OP   => OUT_SEC_OP    ,
+        OUT_RD_ADD   => OUT_RD_ADD    ,
+        OUT_RS_ADD   => OUT_RS_ADD    ,
+        OUT_RT_ADD   => OUT_RT_ADD    ,
+        OUT_EX_FLUSH => OUT_EX_FLUSH  ,
 
         -------Outputs from Control register
-        memValue,
-        memAddress,
-        SPOP,
-        SPNUM,
-        WB,
-        MEM,
-        EX,
-        RTI,
-        BackupFlag,
-        RET
+        MEM_VAL      => MEM_VAL       ,
+        MEM_ADD      => MEM_ADD      ,
+        SP_OP        => SP_OP        ,
+        SP_NUM       => SP_NUM       ,
+        WB           => WB           ,
+        MEM          => MEM          ,
+        EX           => EX           ,
+        RTI          => RTI          ,
+        BACKUP_FLAG  => BACKUP_FLAG  ,
+        RET          => RET           ,
+        OUT_PORT_EN  => OUT_PORT_EN
+
     );
 END ARCHITECTURE;
