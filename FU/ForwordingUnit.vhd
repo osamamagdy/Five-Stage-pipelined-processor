@@ -16,6 +16,9 @@ ARCHITECTURE arch OF ForwardingUnit IS
     SIGNAL op1_equal_last : STD_LOGIC;
     SIGNAL op1_equal_before_last : STD_LOGIC;
     SIGNAL op1_equal_both : STD_LOGIC;
+    SIGNAL op2_equal_last : STD_LOGIC;
+    SIGNAL op2_equal_before_last : STD_LOGIC;
+    SIGNAL op2_equal_both : STD_LOGIC;
 BEGIN
     op1_equal_last <= '1' WHEN
         current_op1_address = last_Rd
@@ -27,6 +30,19 @@ BEGIN
         '0';
     op1_equal_both <= '1' WHEN
         op1_equal_last = '1' AND op1_equal_before_last = '1'
+        ELSE
+        '0';
+
+    op2_equal_last <= '1' WHEN
+        current_op2_address = last_Rd
+        ELSE
+        '0';
+    op2_equal_before_last <= '1' WHEN
+        current_op2_address = before_last_Rd
+        ELSE
+        '0';
+    op2_equal_both <= '1' WHEN
+        op2_equal_last = '1' AND op2_equal_before_last = '1'
         ELSE
         '0';
 
@@ -43,13 +59,17 @@ BEGIN
         "10" WHEN op1_equal_before_last = '1'AND before_last_WB = "11"
         ELSE
         "00";
-    op2_mux <= "01" WHEN current_op2_address = last_Rd AND last_WB = "10"
+    op2_mux <= "01" WHEN op2_equal_both = '1' AND last_WB = "10"
         ELSE
-        "10" WHEN current_op2_address = last_Rd AND last_WB = "11"
+        "10" WHEN op2_equal_both = '1'
         ELSE
-        "10" WHEN current_op2_address = before_last_Rd AND before_last_WB = "10"
+        "01" WHEN op2_equal_last = '1' AND last_WB = "10"
         ELSE
-        "10" WHEN current_op2_address = before_last_Rd AND before_last_WB = "11"
+        "10" WHEN op2_equal_last = '1' AND last_WB = "11"
+        ELSE
+        "10" WHEN op2_equal_before_last = '1'AND before_last_WB = "10"
+        ELSE
+        "10" WHEN op2_equal_before_last = '1'AND before_last_WB = "11"
         ELSE
         "00";
 END ARCHITECTURE;

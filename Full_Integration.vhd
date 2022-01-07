@@ -38,9 +38,14 @@ ARCHITECTURE arch OF Processor IS
         -------Outputs From EX_MEM_WB Stage---------------------
         SIGNAL flags : STD_LOGIC_VECTOR(2 DOWNTO 0);
         SIGNAL jumpAddress : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL RTI_OUTPUT : std_LOGIC;
+        SIGNAL RET_OUTPUT : STD_LOGIC;
+        SIGNAL Write_EN_OUT : STD_LOGIC;
+        SIGNAL RD_ADDRESS_OUTPUT : STD_LOGIC_VECTOR (2 DOWNTO 0);
         -- output of mux 4
-        SIGNAL rd_data: std_logic_vector ( 15 downto 0);
+        SIGNAL rd_data: std_logic_vector ( 31 downto 0);
         -- from alu result data
+    
     
 
 BEGIN
@@ -75,7 +80,10 @@ BEGIN
         -- from control unit
         out_port_en => OUT_PORT_EN, --Input
         -- Outputs
-        -- 
+        RTI_OUTPUT => RTI_OUTPUT ,
+        RET_OUTPUT => RET_OUTPUT ,
+        Write_EN_OUT => Write_EN_OUT,
+        RD_ADDRESS_OUTPUT => RD_ADDRESS_OUTPUT,
         -- output of mux 4
         rd_data => rd_data,
         -- from alu result data
@@ -91,19 +99,19 @@ BEGIN
         
         IS_EXCEPTION => '0' ,   -----------?????????????????From Exception Unit when implemented 
         
-        IN_RET => '0' ,         ----------------??????????????   Not implemented yet
-        
-        IN_RTI => '0' ,         ---------------????????????? Not implemented yet
-        
+        IN_RET => RTI_OUTPUT ,       
+
+        IN_RTI => RTI_OUTPUT ,        
+
         IS_HAZARD => '0' ,      ---------------???????????? Came From Hazard Detection Unit
 
         IN_PORT => IN_PORT ,
 
-        Write_Address => (OTHERS => '0' )  , --------------??????????? NOT implemented yet
+        Write_Address => RD_ADDRESS_OUTPUT , --------------??????????? NOT implemented yet
 
-        Write_Value =>      (OTHERS => '0' )  ,  ----------------?????????????? NOT implemented yet  ,
+        Write_Value =>   rd_data(15 DOWNTO 0) ,
 
-        Write_EN =>     '0'  ,      ----------------???????????? NOT implemented yet,
+        Write_EN =>  Write_EN_OUT ,      
 
         Flag_Reg =>  flags,
 
