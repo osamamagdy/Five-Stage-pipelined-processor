@@ -27,6 +27,13 @@ ENTITY ExecutionStage IS
         RETin : IN STD_LOGIC;
         EXflush : IN STD_LOGIC;
 
+    ---------Forwarding Unit : Requires a mux for op1 and op2 with the selector from forwarding unit 
+        MEM_WB_RD : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+        EX_MEM_ALURESULT : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+        MUX_8_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
+        MUX_9_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
+
+
         -- Outputs
         memValueout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         memAddressout : OUT STD_LOGIC;
@@ -71,15 +78,23 @@ ARCHITECTURE arch OF ExecutionStage IS
     SIGNAL WBtemp : STD_LOGIC_VECTOR(1 DOWNTO 0);
     SIGNAL MEMtemp : STD_LOGIC_VECTOR(1 DOWNTO 0);
     SIGNAL ALUtemp : STD_LOGIC_VECTOR(15 DOWNTO 0);
+
 BEGIN
     aluF : ALUwithFlags PORT MAP(op1, op2, EX, RTIin, clk, BackupFlag(0), reset, ALUtemp, flags);
 
-    -- op1 <= RSdata WHEN mux = '0'
-    --     ELSE
-    --     forward WHEN mux = '1';
-
-    op1 <= RSdata;
-    op2 <= secondOperand;
+    ------MUX 8 SELECTOR
+     op1 <= EX_MEM_ALURESULT WHEN MUX_8_SEL = "10"
+        ELSE
+        MEM_WB_RD WHEN MUX_8_SEL = "01"
+        ELSE
+        RSdata;
+             
+    -----MUX 9 SELECTOR         
+    op2 <= EX_MEM_ALURESULT WHEN MUX_9_SEL = "10"
+        ELSE
+        MEM_WB_RD WHEN MUX_9_SEL = "01"
+        ELSE
+        secondOperand;
 
     jumpAddress <= "0000000000000000" & op1;
     WBtemp <= WBin WHEN EXflush = '0'

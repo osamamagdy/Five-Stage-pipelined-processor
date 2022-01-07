@@ -26,7 +26,12 @@ port(
 	-- output of mux 14
 	rd_data: OUT std_logic_vector ( 31 downto 0);
 	-- from alu result data
-	output_port: OUT std_logic_vector ( 15 downto 0)
+	output_port: OUT std_logic_vector ( 15 downto 0);
+	--- Out put to the decode stage
+	RTI_OUTPUT : OUT std_LOGIC;
+	RET_OUTPUT : OUT STD_LOGIC;
+	Write_EN_OUT : OUT STD_LOGIC;
+	RD_ADDRESS_OUTPUT : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
 );
 
 END write_back_stage;
@@ -55,5 +60,12 @@ BEGIN
 	extend_alu: sign_extend GENERIC MAP(32) PORT MAP(input(52 downto 37),alu_extended);
 	-- connecting to the mem_wb 
 	mux14: mux2x1 GENERIC MAP(32) PORT MAP(alu_extended, input(36 downto 5), input(53), rd_data);
+	-------
+	RTI_OUTPUT <= INPUT(4);
+	RET_OUTPUT <= INPUT(3);
+	RD_ADDRESS_OUTPUT <= INPUT(2 DOWNTO 0);
+	Write_EN_OUT <= INPUT(54);
+
+
 
 END arch_write_back_stage;

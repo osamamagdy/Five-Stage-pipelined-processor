@@ -154,7 +154,7 @@ myMux4 : entity work.mux2 GENERIC MAP (19) port map(
 );
 
 myMux10 : entity work.mux2 GENERIC MAP (16) port map(
-    sel => OR_gate_out,
+    sel => mux_10_selector,
     in0 =>reg_file_out3,
     in1 => INSTRUCTION(15 DOWNTO 0),
     out1 => second_operand
