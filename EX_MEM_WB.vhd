@@ -38,7 +38,11 @@ ENTITY EX_MEM_WB IS
     RTI_OUTPUT : OUT std_LOGIC;
 	RET_OUTPUT : OUT STD_LOGIC;
     Write_EN_OUT : OUT STD_LOGIC;
-	RD_ADDRESS_OUTPUT : OUT STD_LOGIC_VECTOR (2 DOWNTO 0)
+	RD_ADDRESS_OUTPUT : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
+    -- exception handler pc
+    Exception_Handler_out: out std_logic_vector(31 downto 0);
+    -- is_exception OR NOT
+    EXCEPTION_out: OUT STD_LOGIC
     );
 END EX_MEM_WB;
 
@@ -103,8 +107,11 @@ ARCHITECTURE arch OF EX_MEM_WB IS
             -- ret from call enable
             ret_output : OUT STD_LOGIC;
             -- rd address: the destination register, to enter the forwarding unit
-            rd_address_output : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
-	    
+            rd_address_output : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+	    -- exception handler pc
+	    Exception_Handler: out std_logic_vector(31 downto 0);
+	    -- is_exception OR NOT
+	    EXCEPTION: OUT STD_LOGIC
         );
     END COMPONENT;
 
@@ -232,7 +239,6 @@ ARCHITECTURE arch OF EX_MEM_WB IS
     SIGNAL MEM_WB_RD_DATA : STD_LOGIC_VECTOR (31 DOWNTO 0);
 
     ----
-
 BEGIN
 	
 WB_EN_DUMMY <= (wb_en & alu_mem_output);
@@ -280,7 +286,9 @@ MEM_Stage : memory_stage PORT MAP(
         mem_out,
         signal_rti_output,
         signal_ret_output,
-        signal_rd_address_output
+        signal_rd_address_output,
+	Exception_Handler_out,
+	EXCEPTION_out
     );
   	
 wb_input(54)<=wb_en;

@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
-
+USE ieee.numeric_std.ALL;
 ENTITY memory_stage IS
 port(
 	------ inputs ------
@@ -61,7 +61,11 @@ port(
 	-- ret from call enable
 	ret_output: out std_logic;
 	-- rd address: the destination register, to enter the forwarding unit
-	rd_address_output: out std_logic_vector(2 downto 0)
+	rd_address_output: out std_logic_vector(2 downto 0);
+	-- exception handler pc
+	Exception_Handler: out std_logic_vector(31 downto 0);
+	-- is_exception OR NOT
+	EXCEPTION: OUT STD_LOGIC
 );
 END memory_stage;
 
@@ -91,15 +95,92 @@ PORT (
 	input: IN std_logic_vector( 55 downto 0 );
     output : OUT std_logic_vector( 55 downto 0 ));
 END Component;
+
+Component memStageRam IS
+	PORT(
+		clk : IN std_logic;
+		we  : IN std_logic; -- write enable (store)
+        	re  : IN std_logic; -- read enable (load)
+		sp_num: IN std_logic; -- if 0 then add 1, if 1 then add 2
+		mem_Address: In std_logic; -- if 0: data, if 1: stack
+		is_exception: In std_logic;
+		address : IN  std_logic_vector(31 DOWNTO 0); 
+		datain  : IN  std_logic_vector(31 DOWNTO 0); -- databus width
+		dataout : OUT std_logic_vector(31 DOWNTO 0)); 
+END Component;
+
+Component mux4x1 IS
+GENERIC (n : integer := 8);
+PORT( in0,in1,in2,in3: IN std_logic_vector (n-1 DOWNTO 0);
+              sel : IN std_logic_vector (1 DOWNTO 0);
+              out1: OUT std_logic_vector (n-1 DOWNTO 0));
+END Component;
+
+Component mux2x1 IS
+GENERIC (n : integer := 8);
+PORT( in0,in1: IN std_logic_vector (n-1 DOWNTO 0);
+              sel : IN std_logic;
+              out_mux: OUT std_logic_vector (n-1 DOWNTO 0));
+END Component;
+
+Component sign_extend IS
+	GENERIC ( n : integer := 32);
+	PORT(
+        input_16  : IN std_logic_vector( 15 downto 0);
+        out_n : OUT std_logic_vector(n - 1 downto 0)
+    );
+END Component;
+
+Component epc IS
+	GENERIC ( n : integer := 32);
+	PORT( 
+		clk, en, rst : IN std_logic;
+		d : IN std_logic_vector(n-1 DOWNTO 0);
+		q : OUT std_logic_vector(n-1 DOWNTO 0));
+END Component;
+Component SP_REGISTER IS
+    GENERIC (N : INTEGER := 32);
+    PORT (
+        D: IN STD_LOGIC_VECTOR (n - 1 DOWNTO 0);
+        CLK, RST: IN STD_LOGIC;
+        Q: OUT STD_LOGIC_VECTOR (n - 1 DOWNTO 0)
+    );
+END Component;
+
+Component ExceptionUnit IS
+	PORT(
+		
+		mem_Address: In std_logic; -- if 0: data, if 1: stack
+        stack_op: In std_logic; -- sp_op[0]: if 0: push if 1: pop
+		stack_address : IN  std_logic_vector(31 DOWNTO 0); 
+        memory_address : IN  std_logic_vector(15 DOWNTO 0); -- coming from alu result
+		is_exception: OUT std_logic
+		);
+END Component;
+
+
 ---- Signals ----
 SIGNAL q: std_logic_vector(55 downto 0); -- buffer input
 SIGNAL d: std_logic_vector(55 downto 0); -- buffer output
+SIGNAL alu_extended: std_logic_vector(31 downto 0); --alu result
+SIGNAL r_src1_extended: std_logic_vector(31 downto 0); 
+SIGNAL memory_datain: std_logic_vector(31 downto 0); 
+SIGNAL memory_address_in:  std_logic_vector(31 downto 0); 
+SIGNAL stack_address_in: std_logic_vector(31 downto 0); 
+
+SIGNAL stack_address: std_logic_vector(31 downto 0); 
+SIGNAL increment_amount: std_logic_vector(31 downto 0); 
+SIGNAL new_sp: std_logic_vector(31 downto 0); 
+SIGNAL final_sp:  std_logic_vector(31 downto 0); 
+SIGNAL IS_EX: std_logic;
+SIGNAL EPC_out: std_logic_vector(31 downto 0); 
+SIGNAL mem_out: std_logic_vector(31 downto 0); 
 BEGIN
 	-- writing to the mem/wb buffer
 	q(55)<=out_port_en;
 	q(54 downto 53)<= wb;
 	q(52 downto 37)<= alu_res;
-	q(36 downto 5)<= (others=>'0'); -- TODO :: replace this with memory output
+	q(36 downto 5)<= mem_out;
 	q(4)<= rti; 
 	q(3)<= ret;
 	q(2 downto 0)<= rd_address;
@@ -112,11 +193,54 @@ BEGIN
 	rti_output <= d(4);
 	ret_output <= d(3);
 	rd_address_output <= d(2 downto 0);
+	-- extending data to fit muxes
+	extend_alu_result: sign_extend GENERIC MAP(32) PORT MAP(alu_res, alu_extended);
+	extend_r_src1: sign_extend GENERIC MAP(32) PORT MAP(r_src1,r_src1_extended);
+
+	-- choosing the memory data-in
+	mux12: mux4x1 GENERIC MAP(32) PORT MAP(r_src1_extended, alu_extended,next_pc,next_pc,mem_value, memory_datain);
+	mux13: mux2x1 GENERIC MAP(32) PORT MAP(pc, stack_address,mem_address, memory_address_in); 
+	-- stack pointer
+	mux11: mux2x1 GENERIC MAP(32) PORT MAP(X"00000001", X"00000002",sp_num, increment_amount); 
+	mux16: mux2x1 GENERIC MAP(32) PORT MAP(stack_address, new_sp,sp_op(1), stack_address_in); 
+	mux17: mux2x1 GENERIC MAP(32) PORT MAP(stack_address, new_sp, sp_op(0), final_sp); 
+	sp_register_call: SP_REGISTER GENERIC Map(32) PORT MAP(
+        stack_address_in,
+        clk, '0', -- i don't know if we'll need to reset it or not
+        stack_address
+    );
+
+	-- adder/sub
+	new_sp <= std_logic_vector(unsigned(stack_address) + unsigned(increment_amount)) when sp_op(0) ='1' 
+	ELSE std_logic_vector(unsigned(stack_address) - unsigned(increment_amount)) when sp_op(0) ='0' ;
+
 	-- connecting to the mem_wb buffer
 	mem_wb_buff: mem_wb_buffer PORT MAP(flush_mem_Wb,clk,q, d);
 
-
-	
-	
+	-- Exception Unit
+	ExceptionUnitCall: ExceptionUnit 
+	PORT MAP(
+		mem_address,
+        sp_op(0),
+		final_sp,
+        alu_res,
+		IS_EX
+		);
+	ExceptionPC: epc GENERIC MAP(32) PORT MAP(clk, IS_EX, '0', pc, EPC_out);
+	-----------------
+	--- ram
+	DataMemAndStack: memStageRam PORT MAP(
+		clk,
+		mem_write,
+        mem_read,
+		sp_num, -- if 0 then add 1, if 1 then add 2(as a push/pop indicator)
+		mem_address, -- if 0: data, if 1: stack
+		IS_EX,
+		memory_address_in,
+		memory_datain,
+		mem_out); 
+	mem<=	mem_out;
+	Exception_Handler<=	mem_out when IS_EX='1';
+	EXCEPTION<= IS_EX;
 END mem_arch;
 

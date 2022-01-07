@@ -286,3 +286,35 @@
 # End of Stack Trace
 
 
+# Current time Fri Jan 07 16:38:28 2022
+# ModelSim ALTERA Stack Trace
+# Program = vsim
+# Id = "10.4d"
+# Version = "2015.12"
+# Date = "Dec 30 2015"
+# Platform = win32pe
+# Signature = 874ed53943f00d82c262b7eaf23d08ef
+# 0    0x00ae0d15: '<unknown (@0xae0d15)>'
+# 1    0x00ae1e52: '<unknown (@0xae1e52)>'
+# 2    0x00ae13e1: '<unknown (@0xae13e1)>'
+# 3    0x00ae1f36: '<unknown (@0xae1f36)>'
+# 4    0x00a9f503: '<unknown (@0xa9f503)>'
+# 5    0x00ab10e6: '<unknown (@0xab10e6)>'
+# 6    0x0080c42d: '<unknown (@0x80c42d)>'
+# 7    0x0080dc65: '<unknown (@0x80dc65)>'
+# 8    0x0080e90f: '<unknown (@0x80e90f)>'
+# 9    0x0081a5f2: '<unknown (@0x81a5f2)>'
+# 10   0x0081acbe: '<unknown (@0x81acbe)>'
+# 11   0x00a1dc81: '<unknown (@0xa1dc81)>'
+# 12   0x00a1e8a1: '<unknown (@0xa1e8a1)>'
+# 13   0x00a1e9cc: '<unknown (@0xa1e9cc)>'
+# 14   0x0081b270: '<unknown (@0x81b270)>'
+# 15   0x1000e054: 'Tcl_ListMathFuncs + 0x444' in 'c:\altera\16.0\modelsim_ase\win32aloem\tcl85.dll'
+# 16   0x1000ecba: 'Tcl_EvalEx + 0x7da' in 'c:\altera\16.0\modelsim_ase\win32aloem\tcl85.dll'
+# 17   0x1000e500: 'Tcl_EvalEx + 0x20' in 'c:\altera\16.0\modelsim_ase\win32aloem\tcl85.dll'
+# 18   0x00fca3e4: '<unknown (@0xfca3e4)>'
+# 19   0x1005fb86: 'Tcl_NotifyChannel + 0x136' in 'c:\altera\16.0\modelsim_ase\win32aloem\tcl85.dll'
+# 20   0x100aab09: 'TclpHasSockets + 0x379' in 'c:\altera\16.0\modelsim_ase\win32aloem\tcl85.dll'
+# End of Stack Trace
+
+
