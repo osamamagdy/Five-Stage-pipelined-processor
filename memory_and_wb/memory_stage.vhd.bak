@@ -45,7 +45,7 @@ port(
 
 	------ outputs ------
 	-- to enable writing on output port
-	out_port_en_out: OUT std_Logic;
+	out_port_en_out: OUT std_Logic
 	-- incication of enabling the wb
 	wb_en: out std_logic;
 	-- mux 14 selector

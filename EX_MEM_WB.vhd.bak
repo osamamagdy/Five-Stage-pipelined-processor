@@ -22,13 +22,16 @@ ENTITY EX_MEM_WB IS
         rtAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
         RETin : IN STD_LOGIC;
         EXflush : IN STD_LOGIC;
+        flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+        -- jump
+        jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         flush_mem_Wb : IN STD_LOGIC;
 	-- from control unit
 	out_port_en: IN STD_LOGIC;
         -- Outputs
         -- 
-        -- output of mux 4
-	rd_data: OUT std_logic_vector ( 15 downto 0);
+        -- output of mux 14
+	rd_data: OUT std_logic_vector ( 31 downto 0);
 	-- from alu result data
 	output_port: OUT std_logic_vector ( 15 downto 0)
     );
@@ -39,6 +42,8 @@ ARCHITECTURE arch OF EX_MEM_WB IS
         PORT (
             ------ inputs ------
             clk : IN STD_LOGIC;
+	    -- to enable writing on output port
+	    out_port_en: IN std_Logic;
             -- for flushing the write back stage
             flush_mem_Wb : IN STD_LOGIC;
             --for resetting the cache
@@ -76,6 +81,8 @@ ARCHITECTURE arch OF EX_MEM_WB IS
             ---------------------
 
             ------ outputs ------
+	    -- to enable writing on output port
+	    out_port_en_out: OUT std_Logic;
             -- incication of enabling the wb
             wb_en : OUT STD_LOGIC;
             -- mux 14 selector
@@ -85,7 +92,7 @@ ARCHITECTURE arch OF EX_MEM_WB IS
             -- input to output port
             alu_res_out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
             -- memory output
-            mem : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+            mem : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
             -- ret interrupt enable
             rti_output : OUT STD_LOGIC;
             -- ret from call enable
@@ -98,30 +105,30 @@ ARCHITECTURE arch OF EX_MEM_WB IS
 
     COMPONENT write_back_stage IS
         PORT (
-            clk : IN STD_LOGIC;
-            out_port_en : IN STD_LOGIC;
-            ------ INPUTS Description------
-            -- incication of enabling the wb
-            -- INPUT[38]-> wb_en: IN std_logic;
-            -- mux 14 selector
-            --to choose whether to write back the alu result or the memory output
-            -- INPUT[37]-> alu_mem: IN std_logic;
-            -- input to mux 14: to be writed back
-            -- input to output port
-            -- INPUT[36: 21]-> alu_res: IN std_logic_vector(15 downto 0);
-            -- memory output
-            -- INPUT[20: 5]-> mem: IN std_logic_vector(15 downto 0);
-            -- ret interrupt enable
-            -- INPUT[4]-> rti: IN std_logic;
-            -- ret from call enable
-            -- INPUT[3]-> ret: in std_logic;
-            -- rd address: the destination register, to enter the forwarding unit
-            -- INPUT[2:0]-> rd_address_output: in std_logic_vector(2 downto 0);
-            input : IN STD_LOGIC_VECTOR(38 DOWNTO 0);
-            -- output of mux 4
-            rd_data : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-            -- from alu result data
-            output_port : OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+        clk: IN STD_LOGIC;
+	out_port_en: IN std_Logic;
+	------ INPUTS Description------
+	-- incication of enabling the wb
+	-- INPUT[54]-> wb_en: IN std_logic;
+	-- mux 14 selector
+	-- to choose whether to write back the alu result or the memory output
+	-- INPUT[53]-> alu_mem: IN std_logic;
+	-- input to mux 14: to be writed back
+	-- input to output port
+	-- INPUT[52: 37]-> alu_res: IN std_logic_vector(15 downto 0);
+	-- memory output
+	-- INPUT[36: 5]-> mem: IN std_logic_vector(31 downto 0);
+	-- ret interrupt enable
+	-- INPUT[4]-> rti: IN std_logic;
+	-- ret from call enable
+	-- INPUT[3]-> ret: in std_logic;
+	-- rd address: the destination register, to enter the forwarding unit
+	-- INPUT[2:0]-> rd_address_output: in std_logic_vector(2 downto 0);
+	input: IN std_logic_vector( 54 downto 0 );
+	-- output of mux 14
+	rd_data: OUT std_logic_vector ( 31 downto 0);
+	-- from alu result data
+	output_port: OUT std_logic_vector ( 15 downto 0)
         );
     END COMPONENT;
 
@@ -129,6 +136,8 @@ ARCHITECTURE arch OF EX_MEM_WB IS
         PORT (
             -- Inputs
             clk : IN STD_LOGIC;
+	    -- to enable writing on output port
+	    out_port_en: IN std_Logic;
             reset : IN STD_LOGIC;
             memValuein : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
             memAddressin : IN STD_LOGIC;
@@ -148,7 +157,7 @@ ARCHITECTURE arch OF EX_MEM_WB IS
             rtAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
             RETin : IN STD_LOGIC;
             EXflush : IN STD_LOGIC;
-
+	
             -- Outputs
             memValueout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
             memAddressout : OUT STD_LOGIC;
@@ -167,7 +176,10 @@ ARCHITECTURE arch OF EX_MEM_WB IS
             ALUres : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
             flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
             -- jump
-            jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+            jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+	    -- to enable writing on output port
+	    out_port_en_out: OUT std_Logic
+);
     END COMPONENT;
 
     SIGNAL memValueout :  STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -184,25 +196,24 @@ ARCHITECTURE arch OF EX_MEM_WB IS
     SIGNAL PCout :  STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL rdAddressout :  STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL ALUres :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL flags :  STD_LOGIC_VECTOR(2 DOWNTO 0);
-    SIGNAL jumpAddress :  STD_LOGIC_VECTOR(31 DOWNTO 0);
 
     SIGNAL wb_en :  STD_LOGIC;
     SIGNAL alu_mem_output :  STD_LOGIC;
     SIGNAL alu_res_out :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL mem_out :  STD_LOGIC_VECTOR(15 DOWNTO 0);
+    SIGNAL mem_out :  STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL rti_output :  STD_LOGIC;
     SIGNAL ret_output :  STD_LOGIC;
     SIGNAL rd_address_output :  STD_LOGIC_VECTOR(2 DOWNTO 0);
-
-    SIGNAL wb_input: STD_LOGIC_VECTOR(38 DOWNTO 0);
+    SIGNAL out_port_en_exec_sig:  STD_LOGIC;
+    SIGNAL out_port_en_mem_sig:  STD_LOGIC;
+    SIGNAL wb_input: STD_LOGIC_VECTOR(54 DOWNTO 0);
    
 
 BEGIN
 	
 
 EX_Stage : ExecutionStage PORT MAP(
-	clk, 
+	clk, out_port_en
 	reset, memValuein, memAddressin, 
 	PCin, nextPCin, SPOPin, 
 	SPNUMin, WBin, MEM, EX, 
@@ -212,14 +223,15 @@ EX_Stage : ExecutionStage PORT MAP(
 	memValueout, memAddressout, 
 	nextPCout, WBout, MemRe, MemWr, 
 	SPOPout, SPNUMout, Rsrc1, RTIout, RETout, 
-	PCout, rdAddressout, ALUres, flags, jumpAddress);
+	PCout, rdAddressout, ALUres, flags, jumpAddress,out_port_en_exec_sig);
 
 MEM_Stage : memory_stage PORT MAP(
-        clk, flush_mem_Wb, reset, memValueout, 
+        clk, out_port_en_exec_sig, flush_mem_Wb, reset, memValueout, 
 	memAddressout, nextPCout, WBout, MemRe, 
 	MemWr, SPOPout, SPNUMout, Rsrc1, ALUres, 
 	RTIout, RETout, PCout, rdAddressout,
         -- Outputs
+	out_port_en_mem_sig,
         wb_en,
         alu_mem_output,
         alu_res_out,
@@ -227,11 +239,11 @@ MEM_Stage : memory_stage PORT MAP(
         rti_output,
         ret_output,
         rd_address_output);
-
-    wb_input(38)<=wb_en;
-    wb_input(37)<=alu_mem_output;
-    wb_input(36 downto 21)<=alu_res_out;
-    wb_input(20 downto 5)<=mem_out;
+  	
+    wb_input(54)<=wb_en;
+    wb_input(53)<=alu_mem_output;
+    wb_input(52 downto 37)<=alu_res_out;
+    wb_input(36 downto 5)<=mem_out;
     wb_input(4)<=rti_output;
     wb_input(3)<=ret_output;
     wb_input(2 downto 0)<=rd_address_output;
@@ -239,7 +251,7 @@ MEM_Stage : memory_stage PORT MAP(
 WB_Stage : write_back_stage PORT MAP(
 	-- inputs
         clk,
-	output_port_en,
+	out_port_en_mem_sig,
 	wb_input,
 	-- output 
 	rd_data,

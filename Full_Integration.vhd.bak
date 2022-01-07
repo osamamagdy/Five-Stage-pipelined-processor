@@ -1,0 +1,142 @@
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE work.ALL;
+
+ENTITY Processor IS
+    PORT (
+        reset : IN STD_LOGIC;
+        clk : IN STD_LOGIC;
+        IN_PORT : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        output_port : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
+END Processor;
+
+ARCHITECTURE arch OF Processor IS
+
+        ----------------- Out From Decode-------------------------
+        SIGNAL OUT_PC       : STD_LOGIC_VECTOR (31 DOWNTO 0);
+        SIGNAL OUT_NEXT_PC  : STD_LOGIC_VECTOR (31 DOWNTO 0);
+        SIGNAL OUT_RS_DATA  : STD_LOGIC_VECTOR (15 DOWNTO 0);
+        SIGNAL OUT_SEC_OP   : STD_LOGIC_VECTOR (15 DOWNTO 0);
+        SIGNAL OUT_RD_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL OUT_RS_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL OUT_RT_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL OUT_EX_FLUSH : STD_LOGIC;
+
+        -------Outputs from Control register-------------------
+        SIGNAL MEM_VAL     : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL MEM_ADD     : STD_LOGIC;
+        SIGNAL SP_OP       : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL SP_NUM      : STD_LOGIC;
+        SIGNAL WB          : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL MEM         : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL EX          : STD_LOGIC_VECTOR(3 DOWNTO 0);
+        SIGNAL RTI         : STD_LOGIC;
+        SIGNAL BACKUP_FLAG : STD_LOGIC_VECTOR(1 DOWNTO 0);
+        SIGNAL RET         : STD_LOGIC ;
+        SIGNAL OUT_PORT_EN : STD_LOGIC ;
+
+        -------Outputs From EX_MEM_WB Stage---------------------
+        SIGNAL flags : STD_LOGIC_VECTOR(2 DOWNTO 0);
+        SIGNAL jumpAddress : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        -- output of mux 4
+        SIGNAL rd_data: std_logic_vector ( 15 downto 0);
+        -- from alu result data
+    
+
+BEGIN
+    EX_MEM_WB_Stages : ENTITY work.EX_MEM_WB PORT MAP(
+        clk => clk,
+        reset => reset,
+        memValuein => MEM_VAL,
+        memAddressin => MEM_ADD ,
+        PCin => OUT_PC,
+        nextPCin => OUT_NEXT_PC ,
+        SPOPin => SP_OP,
+        SPNUMin => SP_NUM,
+        WBin => WB ,
+        MEM => MEM ,
+        EX => EX ,
+        RSdata => OUT_RS_DATA ,
+        secondOperand => OUT_SEC_OP ,
+        RTIin => RTI ,
+        BackupFlag => BACKUP_FLAG ,
+        rdAddressin => OUT_RD_ADD ,
+        rsAddress => OUT_RS_ADD ,
+        rtAddress => OUT_RT_ADD ,
+        RETin => RET ,
+        EXflush => OUT_EX_FLUSH ,
+        flags => flags ,     --OUT
+        jumpAddress => jumpAddress ,    --OUT
+
+        -- Replace These with correct signals
+        -- 
+        -- 
+        flush_mem_Wb => '0' , --As there is no case to flush the Write back buffer (exceptions happen in the Execute stage not after)
+        -- from control unit
+        out_port_en => OUT_PORT_EN, --Input
+        -- Outputs
+        -- 
+        -- output of mux 4
+        rd_data => rd_data,
+        -- from alu result data
+        output_port => output_port
+    );
+
+    Fetch_Decode_Stages : ENTITY work.Fetch_Decode PORT MAP(
+
+
+        reset => reset,
+        clk   => clk ,
+        ----------------Decode inputs from outside -----------------
+        
+        IS_EXCEPTION => '0' ,   -----------?????????????????From Exception Unit when implemented 
+        
+        IN_RET => '0' ,         ----------------??????????????   Not implemented yet
+        
+        IN_RTI => '0' ,         ---------------????????????? Not implemented yet
+        
+        IS_HAZARD => '0' ,      ---------------???????????? Came From Hazard Detection Unit
+
+        IN_PORT => IN_PORT ,
+
+        Write_Address => (OTHERS => '0' )  , --------------??????????? NOT implemented yet
+
+        Write_Value =>      (OTHERS => '0' )  ,  ----------------?????????????? NOT implemented yet  ,
+
+        Write_EN =>     '0'  ,      ----------------???????????? NOT implemented yet,
+
+        Flag_Reg =>  flags,
+
+        -------------------Fetch inputs from outside-----------------------------
+
+        JumpAddress => jumpAddress ,
+        Exception   => (OTHERS => '0' ),        -------????????????NOT yet implemented, came from Exception unit
+        Stack       => (OTHERS => '0' ),        -------????????????NOT yet implemented, came from Memory
+
+        MO_1 => (OTHERS => '0' ),               ------?????????????????NOT Used
+        --
+        ----------------- Out From Decode-------------------------
+        OUT_PC       => OUT_PC       ,
+        OUT_NEXT_PC  => OUT_NEXT_PC   ,
+        OUT_RS_DATA  => OUT_RS_DATA   ,
+        OUT_SEC_OP   => OUT_SEC_OP    ,
+        OUT_RD_ADD   => OUT_RD_ADD    ,
+        OUT_RS_ADD   => OUT_RS_ADD    ,
+        OUT_RT_ADD   => OUT_RT_ADD    ,
+        OUT_EX_FLUSH => OUT_EX_FLUSH  ,
+
+        -------Outputs from Control register
+        MEM_VAL      => MEM_VAL       ,
+        MEM_ADD      => MEM_ADD      ,
+        SP_OP        => SP_OP        ,
+        SP_NUM       => SP_NUM       ,
+        WB           => WB           ,
+        MEM          => MEM          ,
+        EX           => EX           ,
+        RTI          => RTI          ,
+        BACKUP_FLAG  => BACKUP_FLAG  ,
+        RET          => RET           ,
+        OUT_PORT_EN  => OUT_PORT_EN
+
+    );
+END ARCHITECTURE;

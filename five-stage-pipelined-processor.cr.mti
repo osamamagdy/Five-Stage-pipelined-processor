@@ -1,0 +1,62 @@
+{D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/exception_unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/exception_unit.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Compiling entity ExceptionUnit
+-- Compiling architecture EUArch of ExceptionUnit
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity write_back_stage
+-- Compiling architecture arch_write_back_stage of write_back_stage
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/sign_extend.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/sign_extend.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity sign_extend
+-- Compiling architecture arch_sign_extend of sign_extend
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/epc.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/epc.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity epc
+-- Compiling architecture epc_Arch of epc
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/sp_reg.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/sp_reg.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity SP_REGISTER
+-- Compiling architecture StructSP_REGISTER of SP_REGISTER
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/4x2mux.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/4x2mux.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux4x1
+-- Compiling architecture arch_mux4x1 of mux4x1
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/mem_stage_ram.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/mem_stage_ram.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Compiling entity memStageRam
+-- Compiling architecture memStageRamArch of memStageRam
+
+} {} {}}
