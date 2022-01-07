@@ -9,7 +9,7 @@ port(
 	-- incication of enabling the wb
 	-- INPUT[54]-> wb_en: IN std_logic;
 	-- mux 14 selector
-	-- to choose whether to write back the alu result or the memory output
+	--to choose whether to write back the alu result or the memory output
 	-- INPUT[53]-> alu_mem: IN std_logic;
 	-- input to mux 14: to be writed back
 	-- input to output port
@@ -23,7 +23,7 @@ port(
 	-- rd address: the destination register, to enter the forwarding unit
 	-- INPUT[2:0]-> rd_address_output: in std_logic_vector(2 downto 0);
 	input: IN std_logic_vector( 54 downto 0 );
-	-- output of mux 14
+	-- output of mux 4
 	rd_data: OUT std_logic_vector ( 31 downto 0);
 	-- from alu result data
 	output_port: OUT std_logic_vector ( 15 downto 0)
@@ -39,21 +39,9 @@ PORT( in0,in1: IN std_logic_vector (n-1 DOWNTO 0);
               out_mux: OUT std_logic_vector (n-1 DOWNTO 0));
 END COMPONENT;
 
-COMPONENT sign_extend IS
-	GENERIC ( n : integer := 32);
-	PORT(
-        input_16  : IN std_logic_vector( 15 downto 0);
-        out_n : OUT std_logic_vector(n - 1 downto 0)
-    );
-END COMPONENT;
-----------------------------------
-SIGNAL alu_extended: STD_LOGIC_VECTOR(31 downto 0);
-----------------------------------
 BEGIN
 	output_port<= input(52 downto 37) when out_port_en = '1';
-	-- extending alu_res to fit the mux
-	extend_alu: sign_extend GENERIC MAP(32) PORT MAP(input(52 downto 37),alu_extended);
 	-- connecting to the mem_wb 
-	mux14: mux2x1 GENERIC MAP(32) PORT MAP(alu_extended, input(36 downto 5), input(53), rd_data);
+	mux14: mux2x1 GENERIC MAP(32) PORT MAP(input(52 downto 37),input(36 downto 5), input(37), rd_data);
 
 END arch_write_back_stage;

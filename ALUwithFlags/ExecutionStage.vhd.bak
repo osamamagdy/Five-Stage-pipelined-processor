@@ -45,7 +45,7 @@ ENTITY ExecutionStage IS
         ALUres : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
         flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
         -- jump
-        jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
 	-- to enable writing on output port
 	out_port_en_out: OUT STD_LOGIC
 );

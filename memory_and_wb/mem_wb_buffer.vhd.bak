@@ -30,7 +30,7 @@ END mem_wb_buffer;
 
 ARCHITECTURE
     arch_mem_wb_buffer OF mem_wb_buffer IS
-	SIGNAL q: std_logic_vector( 55 downto 0 );
+	SIGNAL q: std_logic_vector( 54 downto 0 );
 	
 	BEGIN
 		output<= q;

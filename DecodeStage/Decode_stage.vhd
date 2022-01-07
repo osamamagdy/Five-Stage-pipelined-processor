@@ -90,7 +90,9 @@ ENTITY myDecode IS
     EX : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
     RTI : OUT STD_LOGIC;
     BACKUP_FLAG : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-    RET : OUT STD_LOGIC);
+    RET : OUT STD_LOGIC;
+    OUT_PORT_EN : OUT STD_LOGIC);
+
 
 
 END ENTITY;
@@ -105,8 +107,8 @@ SIGNAL mux_4_selector : std_logic;
 SIGNAL mux_10_selector : std_logic;
 SIGNAL OR_gate_out : STD_LOGIC;
 SIGNAL OR_gate_in : STD_LOGIC;
-SIGNAL CONTROL_SIGNALS : STD_LOGIC_VECTOR(17 DOWNTO 0);
-SIGNAL Buffer_Input : STD_LOGIC_VECTOR(17 DOWNTO 0);
+SIGNAL CONTROL_SIGNALS : STD_LOGIC_VECTOR(18 DOWNTO 0);
+SIGNAL Buffer_Input : STD_LOGIC_VECTOR(18 DOWNTO 0);
 SIGNAL second_operand : STD_LOGIC_VECTOR (15 DOWNTO 0);
 SIGNAL RS_DATA : STD_LOGIC_VECTOR (15 DOWNTO 0);
 
@@ -144,7 +146,7 @@ myCU : entity work.CU port map(
 
 OR_gate_out <= (OR_gate_in OR IS_HAZARD);
 
-myMux4 : entity work.mux2 GENERIC MAP (18) port map(
+myMux4 : entity work.mux2 GENERIC MAP (19) port map(
     sel => OR_gate_out,
     in0 =>CONTROL_SIGNALS,
     in1 => (OTHERS => '0'),
@@ -203,7 +205,9 @@ myBuffer : entity work.ID_Buffer port map (
     EX           => EX         ,       
     RTI          => RTI        ,     
     BACKUP_FLAG  => BACKUP_FLAG,         
-    RET          => RET                 
+    RET          => RET         ,
+    OUT_PORT_EN => OUT_PORT_EN
+              
 );
 
 

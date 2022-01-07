@@ -1,2 +1,11 @@
 work/
 DecodeStage/buffer/buffer.vhd.bak
+DecodeStage/decode.cr.mti
+DecodeStage/decode.do
+DecodeStage/decode.mpf
+DecodeStage/vsim.wlf
+processor.cr.mti
+processor.mpf
+tcl_stacktrace.txt
+vsim.wlf
+DecodeStage/transcript

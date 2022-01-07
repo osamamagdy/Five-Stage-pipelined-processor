@@ -73,7 +73,7 @@ ARCHITECTURE fetch_structure OF fetch IS
     END COMPONENT;
 
     ------------- SIGNALS -----------------------------------
-    SIGNAL MUX1_PC, MUX2_PC, REG_PC, IRTEMP,pcIn: STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
+    SIGNAL MUX1_PC, MUX2_PC, REG_PC, IRTEMP,pcIn, middle_pc: STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
 
 BEGIN
     -- next pc chooser mux
@@ -88,7 +88,8 @@ BEGIN
     INSTRUC_MEM : instruction_mem PORT MAP(REG_PC, CLK, IRTEMP);
     IR <= IRTEMP;
 
-    IMM_CHECK : CheckImmediate GENERIC MAP(N) PORT MAP(REG_PC, IRTEMP, PcIn);
-    next_pcout <= PcIn;
+    IMM_CHECK : CheckImmediate GENERIC MAP(N) PORT MAP(REG_PC, IRTEMP, middle_pc);
+    next_pcout <= middle_pc;
+    PcIn <= middle_pc ;
     
 END fetch_structure;
