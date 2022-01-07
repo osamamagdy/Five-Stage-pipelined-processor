@@ -7,7 +7,7 @@ ENTITY fetch IS
         N : INTEGER := 32
     );
     PORT (
-    
+
         JumpAddress : IN STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
         Exception   : IN STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
         Stack       : IN STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
@@ -15,7 +15,7 @@ ENTITY fetch IS
         MUX1_SEL    : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         HLT         : IN STD_LOGIC;
         --
-        MO_1 : IN STD_LOGIC_VECTOR(N-1 DOWNTO 0);
+        MO_1 : IN STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
         --
         pcOut      : OUT STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
         next_pcout : OUT STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
@@ -59,37 +59,38 @@ ARCHITECTURE fetch_structure OF fetch IS
         );
         PORT (
             PC          : IN STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0);
-            Clk         : IN STD_LOGIC;
-            instruction : OUT STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0)
+            RST         : IN STD_LOGIC;
+            instruction : OUT STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0);
+            M0_1        : OUT STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0)
         );
     END COMPONENT;
 
     COMPONENT PC_REGISTER IS
         PORT (
-            D                : IN STD_LOGIC_VECTOR (N - 1 DOWNTO 0);
-            CLK, RST, HLT : IN STD_LOGIC;
-            Q                : OUT STD_LOGIC_VECTOR (N - 1 DOWNTO 0)
+            D        : IN STD_LOGIC_VECTOR (N - 1 DOWNTO 0);
+            CLK, HLT : IN STD_LOGIC;
+            Q        : OUT STD_LOGIC_VECTOR (N - 1 DOWNTO 0)
         );
     END COMPONENT;
 
     ------------- SIGNALS -----------------------------------
-    SIGNAL MUX1_PC, MUX2_PC, REG_PC, IRTEMP,pcIn, middle_pc: STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
+    SIGNAL MUX1_PC, MUX2_PC, REG_PC, IRTEMP,pcIn, middle_pc,M0_1: STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
 
 BEGIN
-    -- next pc chooser mux
-    Mux1 : mux_41 GENERIC MAP(N) PORT MAP(MUX1_SEL, pcIn, JumpAddress, Exception, Stack, MUX1_PC);
+     -- next pc chooser mux
+     Mux1 : mux_41 GENERIC MAP(N) PORT MAP(MUX1_SEL, pcIn, JumpAddress, Exception, Stack, MUX1_PC);
 
-    Mux2 : mux_21 GENERIC MAP(N) PORT MAP(reset, MUX1_PC, MO_1, MUX2_PC);
+     Mux2 : mux_21 GENERIC MAP(N) PORT MAP(reset, MUX1_PC, M0_1, MUX2_PC);
+ 
+     ------------------- PC --------------------------------
+     PC : PC_REGISTER GENERIC MAP(N) PORT MAP(MUX2_PC, CLK, HLT, REG_PC);
+     pcOut <= REG_PC;
+     ------------- INSTUCTION MEMORY -----------------------
+     INSTRUC_MEM : instruction_mem PORT MAP(REG_PC, CLK, IRTEMP, M0_1);
+     IR <= IRTEMP;
+ 
+     IMM_CHECK : CheckImmediate GENERIC MAP(N) PORT MAP(REG_PC, IRTEMP, middle_pc);
+     next_pcout <= middle_pc;
+     PcIn <= middle_pc ;
 
-    ------------------- PC --------------------------------
-    PC : PC_REGISTER GENERIC MAP(N) PORT MAP(MUX2_PC, CLK, reset, HLT, REG_PC);
-    pcOut <= REG_PC;
-    ------------- INSTUCTION MEMORY -----------------------
-    INSTRUC_MEM : instruction_mem PORT MAP(REG_PC, CLK, IRTEMP);
-    IR <= IRTEMP;
-
-    IMM_CHECK : CheckImmediate GENERIC MAP(N) PORT MAP(REG_PC, IRTEMP, middle_pc);
-    next_pcout <= middle_pc;
-    PcIn <= middle_pc ;
-    
 END fetch_structure;

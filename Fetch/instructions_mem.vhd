@@ -14,8 +14,9 @@ ENTITY instruction_mem IS
     );
     PORT (
         PC          : IN STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0);
-        Clk         : IN STD_LOGIC;
-        instruction : OUT STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0)
+        RST         : IN STD_LOGIC;
+        instruction : OUT STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0);
+        M0_1        : OUT STD_LOGIC_VECTOR(MEMDataSize - 1 DOWNTO 0)
     );
 END instruction_mem;
 
@@ -33,4 +34,7 @@ BEGIN
     -- END PROCESS;
     instruction(MEMDataSize - 1 DOWNTO 16) <= ram(to_integer(unsigned(PC)));
     instruction(15 DOWNTO 0)               <= ram(to_integer(unsigned(PC) + 1));
+    M0_1(MEMDataSize - 1 DOWNTO 16)        <= ram((0)) WHEN RST = '1' ELSE ((OTHERS => '0'));
+    M0_1(15 DOWNTO 0)                      <= ram((1)) WHEN RST = '1' ELSE ((OTHERS => '0'));
+    
 END instruction_mem_arch;
