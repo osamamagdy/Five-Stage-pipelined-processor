@@ -165,7 +165,7 @@ myMux5 : entity work.mux4 port map(
     in0 =>IN_PORT,
     in1 => reg_file_out1 , 
     in2 => reg_file_out2,
-    in3 => reg_file_out3,
+    in3 => (OTHERS => '0'),
     sel => mux_5_selector,
     out1 => RS_DATA
 
@@ -196,7 +196,7 @@ myBuffer : entity work.ID_Buffer port map (
     OUT_RD_ADD   =>OUT_RD_ADD  ,       
     OUT_RS_ADD   =>OUT_RS_ADD  ,     
     OUT_RT_ADD   =>OUT_RT_ADD  ,
-    OUT_DATA_FOR_STORE => OUT_DATA_FOR_STORE,
+    OUT_DATA_FOR_STORE => OUT_DATA_FOR_STORE
 
     -------Outputs from Control register
     MEM_VAL      => MEM_VAL    ,          

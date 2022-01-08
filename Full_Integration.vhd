@@ -21,6 +21,7 @@ ARCHITECTURE arch OF Processor IS
         SIGNAL OUT_RS_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
         SIGNAL OUT_RT_ADD   : STD_LOGIC_VECTOR (2 DOWNTO 0);
         SIGNAL OUT_EX_FLUSH : STD_LOGIC;
+        SIGNAL OUT_DATA_FOR_STORE : STD_LOGIC_VECTOR (15 DOWNTO 0);
 
         -------Outputs from Control register-------------------
         SIGNAL MEM_VAL     : STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -62,6 +63,7 @@ BEGIN
         MEM => MEM ,
         EX => EX ,
         RSdata => OUT_RS_DATA ,
+        DATA_FOR_STORE => OUT_DATA_FOR_STORE,
         secondOperand => OUT_SEC_OP ,
         RTIin => RTI ,
         BackupFlag => BACKUP_FLAG ,
@@ -132,6 +134,7 @@ BEGIN
         OUT_RS_ADD   => OUT_RS_ADD    ,
         OUT_RT_ADD   => OUT_RT_ADD    ,
         OUT_EX_FLUSH => OUT_EX_FLUSH  ,
+        OUT_DATA_FOR_STORE => OUT_DATA_FOR_STORE,
 
         -------Outputs from Control register
         MEM_VAL      => MEM_VAL       ,

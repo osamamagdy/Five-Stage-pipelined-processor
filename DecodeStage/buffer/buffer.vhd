@@ -65,12 +65,14 @@ ENTITY ID_Buffer IS
     IN_RD_ADD : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
     IN_RS_ADD : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
     IN_RT_ADD : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+    IN_DATA_FOR_STORE : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
 
     -------Outputs
     OUT_PC : OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
     OUT_NEXT_PC : OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
     OUT_RS_DATA : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
     OUT_SEC_OP : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
+    OUT_DATA_FOR_STORE : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
     OUT_RD_ADD : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
     OUT_RS_ADD : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
     OUT_RT_ADD : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
@@ -92,6 +94,9 @@ END ID_Buffer;
 
 ARCHITECTURE my_Buffer OF ID_Buffer IS
 BEGIN
+
+
+    OUT_DATA_FOR_STORE <= IN_DATA_FOR_STORE;
     ------They have the same Clk, Rst, en bit as we want to move the entire 32-bit together
     myOut_Port : ENTITY work.my_DFF_2 PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(18), q => OUT_PORT_EN);
     myMem_Value : ENTITY work.my_nDFF_2 GENERIC MAP (2) PORT MAP(Clk => Clk, rst => rst, d => Control_Signal(17 DOWNTO 16), q => MEM_VAL);

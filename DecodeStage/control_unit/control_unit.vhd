@@ -156,7 +156,7 @@ BEGIN
         ELSIF (OP_CODE = "10000") THEN ---STD
             Control_Signals <= "0000000000101000000";
             MUX_1 <= "00";
-            MUX_5 <= "01";
+            MUX_5 <= "11";
             MUX_10 <= '1';
             IF_Flush <= IS_EXCEPTION;
             ID_Flush <= IS_EXCEPTION;

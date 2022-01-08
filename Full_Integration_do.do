@@ -50,10 +50,10 @@ mem load -skip 0 -filltype inc -filldata 0001000011101111 -fillradix binary -sta
 mem load -skip 0 -filltype inc -filldata 0111110111100000 -fillradix binary -startaddress 7 -endaddress 7 /processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype inc -filldata 0001000011101101 -fillradix binary -startaddress 8 -endaddress 8 /processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 
-#STD 110 101
+#STD 110 110 010
     #0001 0000 1110 1101 => 10ED
-mem load -skip 0 -filltype inc -filldata 1000011010100000 -fillradix binary -startaddress 9 -endaddress 9 /processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype inc -filldata 0001000011101101 -fillradix binary -startaddress 10 -endaddress 10 /processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype inc -filldata 1000011011001000 -fillradix binary -startaddress 7 -endaddress 7 /processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype inc -filldata 0001000011101101 -fillradix binary -startaddress 8 -endaddress 8 /processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 
 
 force -freeze sim:/processor/clk 1 0, 0 {50 ps} -r 100

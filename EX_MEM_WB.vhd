@@ -14,6 +14,7 @@ ENTITY EX_MEM_WB IS
         MEM : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         EX : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         RSdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        DATA_FOR_STORE : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
         secondOperand : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
         RTIin : IN STD_LOGIC;
         BackupFlag : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -23,6 +24,7 @@ ENTITY EX_MEM_WB IS
         RETin : IN STD_LOGIC;
         EXflush : IN STD_LOGIC;
         flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+
         -- jump
         jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         flush_mem_Wb : IN STD_LOGIC;
@@ -89,7 +91,7 @@ EX_Stage : ENTITY work.ExecutionStage PORT MAP(
 	reset, memValuein, memAddressin, 
 	PCin, nextPCin, SPOPin, 
 	SPNUMin, WBin, MEM, EX, 
-	RSdata, secondOperand, RTIin, 
+	RSdata, DATA_FOR_STORE ,secondOperand, RTIin, 
 	BackupFlag, rdAddressin, rsAddress, 
 	rtAddress, RETin, EXflush, 
     MEM_WB_RD_DATA(15 DOWNTO 0),

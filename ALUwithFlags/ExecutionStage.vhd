@@ -18,6 +18,7 @@ ENTITY ExecutionStage IS
         MEM : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         EX : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
         RSdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        DATA_FOR_STORE : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
         secondOperand : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
         RTIin : IN STD_LOGIC;
         BackupFlag : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -132,7 +133,7 @@ BEGIN
             MemWr <= MEMtemp(0);
             SPOPout <= SPOPin;
             SPNUMout <= SPNUMin;
-            Rsrc1 <= RSdata;
+            Rsrc1 <= DATA_FOR_STORE;
             RTIout <= RTIin;
             RETout <= RETin;
             PCout <= PCin;
