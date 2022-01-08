@@ -68,7 +68,7 @@ Branch = {
 cwd = os.getcwd()
 print(cwd)
 #f = open(cwd+"\{}".format(fileName), "r")
-f = open(cwd+"\\inputs\\OneOperand.txt")
+f = open(cwd+"\\inputs\\memory.txt")
 binCode= open(cwd+"\\outputs\\bin_binary.do","w")
 hexCode= open(cwd+"\\outputs\\bin_hex.do","w")
 bin_code= open(cwd+"\\bin.mem","w")
@@ -112,15 +112,15 @@ for line in f:
     line = line.split()
     binaryInstruction = ''
     instuction = line[0]
-
+    print(line)
     if instuction == '.ORG':
         hexVal = line[1]
         address = int(hexVal, 16)
         continue
 
-    
+   
     ## check if instruction is hex
-    elif all(c in string.hexdigits for c in instuction):
+    elif all(c in string.hexdigits for c in instuction) and instuction != 'ADD':
         is_number = True
         hexVal = line[0]
         binVal = str("{0:08b}".format(int(hexVal, 16)))
@@ -168,7 +168,7 @@ for line in f:
                     #rest zeros
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
                     binaryInstruction += '\n'+ imm
-                else:   
+                else: 
                     # if not immediate 
                     binaryInstruction += Registers[line[3]]
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
@@ -187,13 +187,16 @@ for line in f:
                 if instuction == 'LDM':
                     binaryInstruction += Registers[line[1]]*3
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
+                    imm = line[2] 
+                    imm = "{0:08b}".format(int(imm, 16))
+                    binaryInstruction += '\n'+ imm
                 else:
                     binaryInstruction += Registers[line[1]]
                     binaryInstruction += Registers[line[2]]*2
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
-                imm = line[3] 
-                imm = "{0:08b}".format(int(imm, 16))
-                binaryInstruction += '\n'+ imm
+                    imm = line[3] 
+                    imm = "{0:08b}".format(int(imm, 16))
+                    binaryInstruction += '\n'+ imm
                 
 
         elif instuction in Branch.keys():
@@ -214,7 +217,6 @@ for line in f:
         -startaddress {} -endaddress {} /fetch_decode/myfetch/INSTRUC_MEM/ram\n'.format(ins,address,address))
         address+=1
 
-    #binCode.write(binaryInstruction+"\n")
     
     
 binCode.close
