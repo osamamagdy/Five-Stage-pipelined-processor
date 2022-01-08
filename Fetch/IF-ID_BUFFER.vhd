@@ -15,7 +15,7 @@ BEGIN
     BEGIN
         IF (rising_edge(CLK)) THEN
 
-            IF (RST = '1'OR FLUSH = '1') THEN
+            IF ( FLUSH = '1') THEN
                 PC_OUT      <= (OTHERS => '0');
                 PC_NEXT_OUT <= (OTHERS => '0');
                 IR_OUT      <= (OTHERS => '0');
