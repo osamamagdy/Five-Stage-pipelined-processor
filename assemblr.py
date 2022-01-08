@@ -70,7 +70,6 @@ print(cwd)
 #f = open(cwd+"\{}".format(fileName), "r")
 f = open(cwd+"\\inputs\\memory.txt")
 binCode= open(cwd+"\\outputs\\bin_binary.do","w")
-hexCode= open(cwd+"\\outputs\\bin_hex.do","w")
 bin_code= open(cwd+"\\bin.mem","w")
 
 binCode.write('vsim -gui work.fetch_decode\n')
@@ -191,10 +190,11 @@ for line in f:
                     imm = "{0:08b}".format(int(imm, 16))
                     binaryInstruction += '\n'+ imm
                 else:
+                    src = line[2].replace('(', ' ').replace(')','').split()
                     binaryInstruction += Registers[line[1]]
-                    binaryInstruction += Registers[line[2]]*2
+                    binaryInstruction += Registers[src[1]]*2
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
-                    imm = line[3] 
+                    imm = src[0]
                     imm = "{0:08b}".format(int(imm, 16))
                     binaryInstruction += '\n'+ imm
                 
@@ -210,17 +210,17 @@ for line in f:
                 binaryInstruction += Registers[line[1]]
                 binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 1)  
 
+
     
     for ins in binaryInstruction.split():
         print('in address {} : {}'.format(hex(address),ins))
         binCode.write('mem load -skip 0 -filltype value -filldata {} -fillradix binary\
-        -startaddress {} -endaddress {} /fetch_decode/myfetch/INSTRUC_MEM/ram\n'.format(ins,address,address))
+        -startaddress {} -endaddress {}  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram\n'.format(ins,address,address))
         address+=1
 
     
     
 binCode.close
-hexCode.close
 
 
 

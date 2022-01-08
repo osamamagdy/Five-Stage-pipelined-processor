@@ -49,12 +49,16 @@ ARCHITECTURE memStageRamArch OF memStageRam IS
 	-- extending ram data to fit the output
 	extend_alu: sign_extend GENERIC MAP(32) PORT MAP( mem_out,mem_extended);
 	-----------------------------------
-	mem_out<=ram(to_integer(unsigned(address)));
-        dataout <= ram(2)&ram(3) WHEN is_exception='1' and mem_Address='0'
+
+	mem_out<=ram(to_integer(unsigned(address))) WHEN re='1' and (mem_Address = '0' or ( mem_Address = '1' and sp_num ='0'));
+    
+	dataout <= ram(2)&ram(3) WHEN is_exception='1' and mem_Address='0' 
+	
 	ELSE ram(4)&ram(5) WHEN is_exception='1' and mem_Address='1'
 	ELSE mem_extended 
 	WHEN re='1' and (mem_Address = '0' or ( mem_Address = '1' and sp_num ='0'))
 	ELSE ram(to_integer(unsigned(address)))&ram(to_integer(unsigned(address)+1))
 	WHEN is_int="01" or (re='1' and mem_Address = '1' and sp_num ='1');
+	
 
     END memStageRamArch;
