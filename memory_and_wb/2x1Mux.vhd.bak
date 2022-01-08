@@ -15,7 +15,8 @@ ARCHITECTURE  arch_mux2x1 OF mux2x1 IS
 BEGIN
      	out_mux <= in0 
 	WHEN sel = '0'
-	ELSE in1 WHEN sel = '1';
+	ELSE in1 WHEN sel = '1'
+	ELSE (others =>"z" ) ;
 
 END arch_mux2x1;
 

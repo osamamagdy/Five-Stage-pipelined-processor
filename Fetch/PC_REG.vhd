@@ -14,7 +14,7 @@ ARCHITECTURE StructPC_REGISTER OF PC_REGISTER IS
 BEGIN
     PROCESS (CLK)
     BEGIN
-        IF falling_edge(CLK) AND HLT = '0' THEN
+        IF falling_edge(CLK) AND (not(HLT = '1') )THEN
             Q <= D;
         END IF;
     END PROCESS;

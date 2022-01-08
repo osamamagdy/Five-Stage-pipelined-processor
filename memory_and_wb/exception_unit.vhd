@@ -16,6 +16,6 @@ END ENTITY ExceptionUnit;
 ARCHITECTURE EUArch OF ExceptionUnit IS
 begin
     is_exception<='1' WHEN (mem_Address ='0' and memory_address>"1111111100000000") or 
-    (mem_Address='1' and stack_op='1' and stack_address<="00000000000100000000000000000000")
+    (mem_Address='1' and stack_op='1' and stack_address>="00000000000100000000000000000000")
     ELSE '0'; 
 END EUArch;

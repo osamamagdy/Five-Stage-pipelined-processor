@@ -201,7 +201,7 @@ BEGIN
 
 	-- choosing the memory data-in
 	mux12: mux4x1 GENERIC MAP(32) PORT MAP(r_src1_extended, alu_extended,next_pc,next_pc,mem_value, memory_datain);
-	mux13: mux2x1 GENERIC MAP(32) PORT MAP(pc, stack_address,mem_address, memory_address_in); 
+	mux13: mux2x1 GENERIC MAP(32) PORT MAP(alu_extended, final_sp,mem_address, memory_address_in); 
 	-- stack pointer
 	mux11: mux2x1 GENERIC MAP(32) PORT MAP(X"00000001", X"00000002",sp_num, increment_amount); 
 	mux16: mux2x1 GENERIC MAP(32) PORT MAP(stack_address, new_sp,sp_op(1), stack_address_in); 
