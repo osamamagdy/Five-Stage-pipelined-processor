@@ -42,7 +42,8 @@ port(
 	-- rd address: the destination register, to enter the forwarding unit
 	rd_address: in std_logic_vector(2 downto 0);
 	---------------------
-
+	-- to indicate whether an interrupt occurred or not
+	backup: in std_logic_vector(1 downto 0);
 	------ outputs ------
 	-- to enable writing on output port
 	out_port_en_out: OUT std_Logic;
@@ -104,6 +105,7 @@ Component memStageRam IS
 		sp_num: IN std_logic; -- if 0 then add 1, if 1 then add 2
 		mem_Address: In std_logic; -- if 0: data, if 1: stack
 		is_exception: In std_logic;
+		is_int: IN std_logic_vector(1 downto 0);
 		address : IN  std_logic_vector(31 DOWNTO 0); 
 		datain  : IN  std_logic_vector(31 DOWNTO 0); -- databus width
 		dataout : OUT std_logic_vector(31 DOWNTO 0)); 
@@ -236,6 +238,7 @@ BEGIN
 		sp_num, -- if 0 then add 1, if 1 then add 2(as a push/pop indicator)
 		mem_address, -- if 0: data, if 1: stack
 		IS_EX,
+		backup,
 		memory_address_in,
 		memory_datain,
 		mem_out); 
