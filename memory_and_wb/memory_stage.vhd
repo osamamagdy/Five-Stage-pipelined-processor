@@ -158,6 +158,8 @@ Component ExceptionUnit IS
         stack_op: In std_logic; -- sp_op[0]: if 0: push if 1: pop
 		stack_address : IN  std_logic_vector(31 DOWNTO 0); 
         memory_address : IN  std_logic_vector(15 DOWNTO 0); -- coming from alu result
+		we: In std_logic; -- if 0: data, if 1: stack
+        re: In std_logic; -- if 0: data, if 1: stack
 		is_exception: OUT std_logic
 		);
 END Component;
@@ -226,8 +228,11 @@ BEGIN
 	PORT MAP(
 		mem_address,
         sp_op(0),
+	
 		final_sp,
         alu_res,
+		mem_write,
+		mem_read,
 		IS_EX
 		);
 	ExceptionPC: epc GENERIC MAP(32) PORT MAP(clk, IS_EX, '0', pc, EPC_out);

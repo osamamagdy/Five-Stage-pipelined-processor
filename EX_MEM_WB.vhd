@@ -119,7 +119,7 @@ BEGIN
         memValueout, memAddressout,
         nextPCout, WBout, MemRe, MemWr,
         SPOPout, SPNUMout, Rsrc1, RTI_OUTPUT,
-        , RET_OUTPUT,
+        RET_OUTPUT,
         PCout, rdAddressout, ALUres, flags, jumpAddress, out_port_en_exec_sig,
         IN_DISABLE_FORWARDING,
         IN_IS_STORE_OP,

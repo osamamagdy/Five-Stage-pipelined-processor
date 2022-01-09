@@ -95,6 +95,8 @@ vsim -gui work.processor
 # Loading work.my_ndff_2(b_my_ndff_2)
 # ** Warning: Design size of 10292 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
 # Expect performance to be adversely affected.
+add wave -position insertpoint  \
+sim:/processor/Fetch_Decode_Stages/mydecode/myReg_file/SIGNAL_FROM_FF
 
 add wave -position insertpoint  \
 sim:/processor/reset \
@@ -143,8 +145,8 @@ mem load -skip 0 -filltype value -filldata 0111101110110100 -fillradix binary   
 mem load -skip 0 -filltype value -filldata 1000000001 -fillradix binary            -startaddress 783 -endaddress 783  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0111110010110100 -fillradix binary            -startaddress 784 -endaddress 784  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1000000000 -fillradix binary            -startaddress 785 -endaddress 785  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 0110101101101100 -fillradix binary            -startaddress 786 -endaddress 786  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 0100000101001100 -fillradix binary            -startaddress 787 -endaddress 787  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+
+mem load -skip 0 -filltype value -filldata 0100000101001100 -fillradix binary            -startaddress 786 -endaddress 786  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 
 force -freeze sim:/processor/clk 1 0, 0 {50 ps} -r 100
 

@@ -62,7 +62,7 @@ ARCHITECTURE arch OF Processor IS
         SIGNAL SIG_IN_EX_BRANCH : STD_LOGIC_VECTOR (2 DOWNTO 0);
         SIGNAL SIG_IN_MEM_BRANCH : STD_LOGIC_VECTOR (1 DOWNTO 0);
 
-        SIGNAL SIG_MUX_1 : STD_LOGIC_VECTORE (31 DOWNTO 0);
+        SIGNAL SIG_MUX_1 : STD_LOGIC_VECTOR (31 DOWNTO 0);
     
 
 BEGIN
@@ -118,7 +118,7 @@ BEGIN
         IN_DISABLE_FORWARDING =>     SIG_DISABLE_FORWARDING,
         IN_IS_STORE_OP => SIG_IS_STORE_OP ,
         IN_EX_BRANCH  => SIG_EX_BRANCH ,
-        IN_MEM_BRANCH => SIG_MEM_BRANCH
+        IN_MEM_BRANCH => SIG_MEM_BRANCH,
         mem_direct_out=> SIG_MUX_1
 
     );
@@ -156,7 +156,7 @@ BEGIN
 
         JumpAddress => jumpAddress ,
         Exception   => Exception_Handler_out,        -------????????????NOT yet implemented, came from Exception unit
-        Stack       => SIG_MUX_1        -------????????????NOT yet implemented, came from Memory
+        Stack       => SIG_MUX_1,        -------????????????NOT yet implemented, came from Memory
 
         MO_1 => (OTHERS => '0' ),               ------?????????????????NOT Used
         --

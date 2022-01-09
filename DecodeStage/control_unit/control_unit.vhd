@@ -431,7 +431,7 @@ BEGIN
                 Control_Signals <= "0000000000000000000";
                 OUT_EX_BRANCH <= "100";
                 OUT_MEM_BRANCH <= "00";
-                MUX_1 <= "10";
+                MUX_1 <= "00";
                 MUX_5 <= "00";
                 MUX_10 <= '0';
                 IF_Flush <= IS_EXCEPTION;
@@ -442,7 +442,7 @@ BEGIN
         
                 ELSIF (OP_CODE = "10101") THEN ---CALL
                 Control_Signals <= "0101101000100000000";
-                MUX_1 <= "10";
+                MUX_1 <= "00";
                 OUT_EX_BRANCH <= "000";
                 OUT_MEM_BRANCH <= "01";
                 MUX_5 <= "00";
@@ -457,7 +457,7 @@ BEGIN
                 Control_Signals <= "0001111111000000001";
                 OUT_EX_BRANCH <= "000";
                 OUT_MEM_BRANCH <= "00";
-                MUX_1 <= "11";
+                MUX_1 <= "00";
                 MUX_5 <= "00";
                 MUX_10 <= '0';
                 IF_Flush <= '0';
@@ -469,7 +469,7 @@ BEGIN
 
                 ELSIF (OP_CODE = "10111") THEN ---INT0
                 Control_Signals <= "0101101000100000010";
-                MUX_1 <= "10";
+                MUX_1 <= "00";
                 OUT_EX_BRANCH <= "000";
                 OUT_MEM_BRANCH <= "10";
                 MUX_5 <= "00";
@@ -482,7 +482,7 @@ BEGIN
         
                 ELSIF (OP_CODE = "11001") THEN ---INT1
                 Control_Signals <= "0101101000100000010";
-                MUX_1 <= "10";
+                MUX_1 <= "00";
                 OUT_EX_BRANCH <= "000";
                 OUT_MEM_BRANCH <= "11";
                 MUX_5 <= "00";
@@ -495,7 +495,7 @@ BEGIN
         
                 ELSIF (OP_CODE = "11000") THEN ---RTI
                 Control_Signals <= "0001111111000001100";
-                MUX_1 <= "11";
+                MUX_1 <= "00";
                 OUT_EX_BRANCH <= "000";
                 OUT_MEM_BRANCH <= "00";
                 MUX_5 <= "00";
