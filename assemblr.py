@@ -68,7 +68,7 @@ Branch = {
 cwd = os.getcwd()
 print(cwd)
 #f = open(cwd+"\{}".format(fileName), "r")
-f = open(cwd+"\\inputs\\branch.txt")
+f = open(cwd+"\\inputs\\memory.txt")
 binCode= open(cwd+"\\outputs\\bin_binary.do","w")
 bin_code= open(cwd+"\\bin.mem","w")
 
@@ -202,8 +202,8 @@ for line in f:
                 else:
                     src = line[2].replace('(', ' ').replace(')','').split()
                     #TODO: load and store
-                    binaryInstruction += Registers[line[1]]
-                    binaryInstruction += Registers[src[1]]*2
+                    binaryInstruction += Registers[line[1]]*2
+                    binaryInstruction += Registers[src[1]]
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
                     imm = src[0]
                     imm = "{0:08b}".format(int(imm, 16))
