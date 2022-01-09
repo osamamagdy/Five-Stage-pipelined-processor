@@ -100,9 +100,9 @@ BEGIN
         secondOperand;
 
     -----MUX Abbas SELECTOR  
-    abbas <= EX_MEM_ALURESULT WHEN abbas_SEL = "10"
+    abbas <= MEM_WB_RD WHEN abbas_SEL = "10"
     ELSE
-    MEM_WB_RD WHEN abbas_SEL = "01"
+    EX_MEM_ALURESULT WHEN abbas_SEL = "01"
     ELSE
     DATA_FOR_STORE;
 
