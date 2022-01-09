@@ -62,8 +62,8 @@ force -freeze sim:/processor/clk 1 0, 0 {50 ps} -r 100
 force -freeze sim:/processor/Fetch_Decode_Stages/myfetch/MUX1_SEL 00 0
 force -freeze sim:/processor/Fetch_Decode_Stages/myfetch/HLT 0 0
 force -freeze sim:/processor/reset 1 0
-force -freeze sim:/processor/IN_PORT x\"0030\" 0
-force -freeze sim:/processor/Fetch_Decode_Stages/MO_1 x\"00a0\" 0
+force -freeze sim:/processor/IN_PORT x\"0019\" 0
+force -freeze sim:/processor/Fetch_Decode_Stages/MO_1 x\"0005\" 0
 force -freeze sim:/processor/Fetch_Decode_Stages/IF_ID_BUFFER/FLUSH 0 0
 force -freeze sim:/processor/EX_MEM_WB_Stages/MEM_Stage/sp_register_call/D 16#FFFFF 0
 

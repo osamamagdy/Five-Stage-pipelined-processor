@@ -41,7 +41,7 @@ BEGIN
             ID_Flush <= IS_EXCEPTION;
             EX_Flush <= IS_EXCEPTION;
         ELSIF (OP_CODE = "00010") THEN ---SETC
-            Control_Signals <= "0000000000000000000";
+            Control_Signals <= "0000000000011110000";
             MUX_1 <= "00";
             MUX_5 <= "00";
             MUX_10 <= '0';
