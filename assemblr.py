@@ -1,6 +1,6 @@
 
 import os
-from os import replace
+from os import replace, truncate
 import string
 
 INSTRUCTION_LEN = 16
@@ -10,8 +10,8 @@ IMMEDIATE = ['IADD','LDM','LDD','STD']
 OneOperandMem = ['LDM']
 TwoOperandMem = []
 NumberOfInstruction = 0
-
-
+Exeption_Int = ['2','4','6','8']
+isExeption_Int = False
 
 Registers = {
     'R0': '000',
@@ -68,15 +68,16 @@ Branch = {
 cwd = os.getcwd()
 print(cwd)
 #f = open(cwd+"\{}".format(fileName), "r")
-f = open(cwd+"\\inputs\\memory.txt")
+f = open(cwd+"\\inputs\\branch.txt")
 binCode= open(cwd+"\\outputs\\bin_binary.do","w")
 bin_code= open(cwd+"\\bin.mem","w")
 
 binCode.write('vsim -gui work.fetch_decode\n')
-binCode.write('mem load -skip 0 -filltype rand -filldata 12 -fillradix decimal /fetch_decode/mydecode/myReg_file/SIGNAL_FROM_FF\n')
-binCode.write('mem load -skip 0 -filltype value -filldata 12 -fillradix decimal /fetch_decode/mydecode/myReg_file/SIGNAL_FROM_FF\n')
-binCode.write('mem load -skip 0 -filltype inc -filldata 12 -fillradix decimal /fetch_decode/mydecode/myReg_file/SIGNAL_FROM_FF\n')
-binCode.write('mem load -skip 0 -filltype inc -filldata 12 -fillradix decimal /fetch_decode/mydecode/myReg_file/SIGNAL_FROM_FF\n')
+binCode.write('mem load -skip 0 -filltype value -filldata 000 -fillradix binary -startaddress 0 -endaddress 7 /processor/Fetch_Decode_Stages/mydecode/myReg_file/SIGNAL_FROM_FF\n')
+
+
+
+
 
 
 
@@ -115,6 +116,10 @@ for line in f:
     if instuction == '.ORG':
         hexVal = line[1]
         address = int(hexVal, 16)
+        if hexVal in Exeption_Int:
+            isExeption_Int = True
+        else:
+            isExeption_Int = False
         continue
 
    
@@ -123,9 +128,14 @@ for line in f:
         is_number = True
         hexVal = line[0]
         binVal = str("{0:08b}".format(int(hexVal, 16)))
-        binaryInstruction += '0'*(32-len(binVal))
-        binaryInstruction += binVal 
-        binaryInstruction = binaryInstruction[:16] + '\n' + binaryInstruction[16:]
+        if not isExeption_Int:
+            binaryInstruction += '0'*(32-len(binVal))
+            binaryInstruction += binVal 
+        else:
+            binaryInstruction += '0'*(16-len(binVal))
+            binaryInstruction += binVal 
+            binaryInstruction += '0'*(32-len(binaryInstruction)) 
+        binaryInstruction = binaryInstruction[:16] + '\n' + binaryInstruction[16:] 
         
     else:
         #no operand
@@ -191,6 +201,7 @@ for line in f:
                     binaryInstruction += '\n'+ imm
                 else:
                     src = line[2].replace('(', ' ').replace(')','').split()
+                    #TODO: load and store
                     binaryInstruction += Registers[line[1]]
                     binaryInstruction += Registers[src[1]]*2
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
@@ -200,26 +211,47 @@ for line in f:
                 
 
         elif instuction in Branch.keys():
-            binaryInstruction += MemoryOperations[instuction]
-            if instuction != 'RET' or instuction != 'INT':
-                binaryInstruction += Registers[line[1]]
-                binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - REGISTER_LEN)
-            elif instuction == 'RET':
+            binaryInstruction += Branch[instuction]
+            if instuction == 'RET' or instuction == 'RTI':
                 binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN )
+            elif instuction == 'INT' :
+                index =  line[1]
+                binaryInstruction += str("{0:08b}".format(int(index, 16)))
+                binaryInstruction += '0' * (INSTRUCTION_LEN - len(binaryInstruction))
             else:
                 binaryInstruction += Registers[line[1]]
-                binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 1)  
+                binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3)  
 
 
     
     for ins in binaryInstruction.split():
-        print('in address {} : {}'.format(hex(address),ins))
-        binCode.write('mem load -skip 0 -filltype value -filldata {} -fillradix binary\
-        -startaddress {} -endaddress {}  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram\n'.format(ins,address,address))
+        if not isExeption_Int:
+            print('in address {} : {}'.format(hex(address),ins))
+            binCode.write('mem load -skip 0 -filltype value -filldata {} -fillradix binary\
+            -startaddress {} -endaddress {}  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram\n'.format(ins,address,address))
+        else :
+            print('in address {} : {}'.format(hex(address),ins))
+            binCode.write('mem load -skip 0 -filltype value -filldata {} -fillradix binary\
+            -startaddress {} -endaddress {}  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram\n'.format(ins,address,address))
         address+=1
 
-    
-    
+
+binCode.write(' force -freeze sim:/processor/clk 1 0, 0 {50 ps} -r 100\n\
+force -freeze sim:/processor/Fetch_Decode_Stages/myfetch/MUX1_SEL 00 0\n\
+force -freeze sim:/processor/Fetch_Decode_Stages/myfetch/HLT 0 0\n\
+force -freeze sim:/processor/reset 1 0\n\
+force -freeze sim:/processor/IN_PORT x\"01a0\" 0\n\
+force -freeze sim:/processor/Fetch_Decode_Stages/MO_1 x\"00a0\" 0\n\
+force -freeze sim:/processor/Fetch_Decode_Stages/IF_ID_BUFFER/FLUSH 0 0\n\
+force -freeze sim:/processor/EX_MEM_WB_Stages/MEM_Stage/sp_register_call/D 16#FFFFF 0\n')
+
+binCode.write('run \n\
+noforce sim:/processor/Fetch_Decode_Stages/myfetch/MUX1_SEL\n\
+noforce sim:/processor/Fetch_Decode_Stages/myfetch/HLT\n\
+noforce sim:/processor/Fetch_Decode_Stages/IF_ID_BUFFER/FLUSH\n\
+noforce sim:/processor/EX_MEM_WB_Stages/MEM_Stage/sp_register_call/D\n\
+force -freeze sim:/processor/reset 0 0')
+
 binCode.close
 
 

@@ -78,7 +78,7 @@ ARCHITECTURE fetch_structure OF fetch IS
 
 BEGIN
      -- next pc chooser mux
-     Mux1 : mux_41 GENERIC MAP(N) PORT MAP(MUX1_SEL, pcIn, JumpAddress, Exception, Stack, MUX1_PC);
+     Mux1 : mux_41 GENERIC MAP(N) PORT MAP(MUX1_SEL, pcIn, Exception,JumpAddress, Stack, MUX1_PC);
 
      Mux2 : mux_21 GENERIC MAP(N) PORT MAP(reset, MUX1_PC, M0_1, MUX2_PC);
  
