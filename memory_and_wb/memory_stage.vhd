@@ -242,7 +242,6 @@ BEGIN
 		memory_address_in,
 		memory_datain,
 		mem_out); 
-	mem<=	mem_out;
 	Exception_Handler<=	mem_out when IS_EX='1';
 	EXCEPTION<= IS_EX;
 END mem_arch;
