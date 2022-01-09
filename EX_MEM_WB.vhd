@@ -81,7 +81,7 @@ ARCHITECTURE arch OF EX_MEM_WB IS
     SIGNAL MUX_9_SEL : STD_LOGIC_VECTOR (1 DOWNTO 0);
     SIGNAL WB_EN_DUMMY : STD_LOGIC_VECTOR (1 DOWNTO 0);
     SIGNAL MEM_WB_RD_DATA : STD_LOGIC_VECTOR (31 DOWNTO 0);
-
+SIGNAL abbas_sel:STD_LOGIC_VECTOR (1 DOWNTO 0);
     ----
 BEGIN
 	
@@ -99,6 +99,7 @@ EX_Stage : ENTITY work.ExecutionStage PORT MAP(
     ALUres,
     MUX_8_SEL,
     MUX_9_SEL,
+    abbas_sel,
 	memValueout, memAddressout, 
 	nextPCout, WBout, MemRe, MemWr, 
 	SPOPout, SPNUMout, Rsrc1, RTIout, RETout, 
@@ -115,6 +116,7 @@ myforwarding_unit : entity work.ForwardingUnit port map(
     before_last_Rd => rdAddressout ,
     op1_mux => MUX_8_SEL ,
     op2_mux =>  MUX_9_SEL,
+    abbas =>  abbas_sel,
     mux_10_sel=>mux_10_sel
     );
     

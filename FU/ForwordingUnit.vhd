@@ -10,6 +10,7 @@ ENTITY ForwardingUnit IS
         before_last_Rd      : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
         op1_mux             : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         op2_mux             : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+        abbas               : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         mux_10_sel          : IN STD_LOGIC);
 
 END ForwardingUnit;
@@ -60,7 +61,7 @@ BEGIN
         "10" WHEN op1_equal_before_last = '1'AND before_last_WB = "11"
         ELSE
         "00";
-    op2_mux <= "00" WHEN mux_10_sel='1'
+    op2_mux <= "00" WHEN mux_10_sel = '1'
         ELSE
         "01" WHEN op2_equal_both = '1' AND last_WB = "10"
         ELSE
@@ -73,6 +74,20 @@ BEGIN
         "10" WHEN op2_equal_before_last = '1'AND before_last_WB = "10"
         ELSE
         "10" WHEN op2_equal_before_last = '1'AND before_last_WB = "11"
+        ELSE
+        "00";
+
+    abbas <= "01" WHEN op1_equal_both = '1' AND last_WB = "10"
+        ELSE
+        "10" WHEN op1_equal_both = '1'
+        ELSE
+        "01" WHEN op1_equal_last = '1' AND last_WB = "10"
+        ELSE
+        "10" WHEN op1_equal_last = '1' AND last_WB = "11"
+        ELSE
+        "10" WHEN op1_equal_before_last = '1'AND before_last_WB = "10"
+        ELSE
+        "10" WHEN op1_equal_before_last = '1'AND before_last_WB = "11"
         ELSE
         "00";
 END ARCHITECTURE;
