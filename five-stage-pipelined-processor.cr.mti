@@ -57,22 +57,29 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling entity my_adder
 -- Compiling architecture a_my_adder of my_adder
 
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/FU/ForwordingUnit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/FU/ForwordingUnit.vhd}
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/EX_MEM_WB.vhd} {0 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/EX_MEM_WB.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity EX_MEM_WB
+-- Compiling architecture arch of EX_MEM_WB
+-- Loading entity ExecutionStage
+-- Loading entity ForwardingUnit
+-- Loading package NUMERIC_STD
+-- Loading entity memory_stage
+** Error: D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/EX_MEM_WB.vhd(160): (vcom-1027) Number of positional association elements (31) exceeds number of formals (29).
+
+-- Loading entity write_back_stage
+** Error: D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/EX_MEM_WB.vhd(188): VHDL Compiler exiting
+
+} {12.0 13.0 15.0 16.0} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/FU/ForwordingUnit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/FU/ForwordingUnit.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Compiling entity ForwardingUnit
 -- Compiling architecture arch of ForwardingUnit
-
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/fetch.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/fetch.vhd}
-Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity fetch
--- Compiling architecture fetch_structure of fetch
 
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/mem_stage_ram.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/mem_stage_ram.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
@@ -83,6 +90,15 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package MATH_REAL
 -- Compiling entity memStageRam
 -- Compiling architecture memStageRamArch of memStageRam
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/fetch.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/fetch.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity fetch
+-- Compiling architecture fetch_structure of fetch
 
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/instructions_mem.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/instructions_mem.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
@@ -102,15 +118,6 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling entity reg_file
 -- Compiling architecture my_reg_file of reg_file
 
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/mux_21.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/mux_21.vhd}
-Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity mux_21
--- Compiling architecture mux_21_structure of mux_21
-
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/ALUwithFlags/ALUwithFlags.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/ALUwithFlags/ALUwithFlags.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package STANDARD
@@ -119,14 +126,14 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling entity ALUwithFlags
 -- Compiling architecture arch of ALUwithFlags
 
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/memory_stage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/memory_stage.vhd}
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/mux_21.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/mux_21.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package NUMERIC_STD
--- Compiling entity memory_stage
--- Compiling architecture mem_arch of memory_stage
+-- Compiling entity mux_21
+-- Compiling architecture mux_21_structure of mux_21
 
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/control_unit/control_unit.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
@@ -147,6 +154,14 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package NUMERIC_STD
 -- Loading entity Fetch_Decode
 
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity Decoder
+-- Compiling architecture my_Decoder of Decoder
+
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/mux_41.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/Fetch/mux_41.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package STANDARD
@@ -156,14 +171,6 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling entity mux_41
 -- Compiling architecture mux_41_structure of mux_41
 
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Decoder_3x8.vhdl}
-Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity Decoder
--- Compiling architecture my_Decoder of Decoder
-
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/register_32.vhdl} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/register_32.vhdl}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package STANDARD
@@ -171,6 +178,14 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package std_logic_1164
 -- Compiling entity my_nDFF
 -- Compiling architecture b_my_nDFF of my_nDFF
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/ALUwithFlags/ExecutionStage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/ALUwithFlags/ExecutionStage.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity ExecutionStage
+-- Compiling architecture arch of ExecutionStage
 
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/buffer/buffer.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/buffer/buffer.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
@@ -185,14 +200,6 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Compiling architecture my_Buffer of ID_Buffer
 -- Loading entity my_DFF_2
 -- Loading entity my_nDFF_2
-
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/ALUwithFlags/ExecutionStage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/ALUwithFlags/ExecutionStage.vhd}
-Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity ExecutionStage
--- Compiling architecture arch of ExecutionStage
 
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/4x2mux.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/4x2mux.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
@@ -249,22 +256,6 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading entity IFID_BUFFER
 -- Loading entity myDecode
 
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd}
-Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity write_back_stage
--- Compiling architecture arch_write_back_stage of write_back_stage
-
-} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl}
-Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity nTRI
--- Compiling architecture my_nTRI of nTRI
-
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/Decode_stage.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading package STANDARD
@@ -281,6 +272,22 @@ Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
 -- Loading entity mux2
 -- Loading entity mux4
 -- Loading entity ID_Buffer
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/wb_stage.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity write_back_stage
+-- Compiling architecture arch_write_back_stage of write_back_stage
+
+} {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/DecodeStage/reg_file/Tri_state.vhdl}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity nTRI
+-- Compiling architecture my_nTRI of nTRI
 
 } {} {}} {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/2x1Mux.vhd} {1 {vcom -work work -2002 -explicit -stats=none {D:/DonyaAll/CMP2023-Y3/First Semester/Arc/arc projects/Project final/Five-Stage-pipelined-processor/memory_and_wb/2x1Mux.vhd}
 Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015

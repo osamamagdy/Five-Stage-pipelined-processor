@@ -58,7 +58,13 @@ ENTITY ExecutionStage IS
         IN_DISABLE_FORWARDING : IN STD_LOGIC;
         IN_IS_STORE_OP : IN STD_LOGIC;
         DISABLE_FORWARDING : OUT STD_LOGIC;
-        IS_STORE_OP : OUT STD_LOGIC
+        IS_STORE_OP : OUT STD_LOGIC;
+        ---Branching 
+        IN_EX_BRANCH : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+        IN_MEM_BRANCH : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
+        OUT_EX_BRANCH : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
+        OUT_MEM_BRANCH : OUT STD_LOGIC_VECTOR (1 DOWNTO 0)
+
     );
 END ExecutionStage;
 
@@ -75,7 +81,6 @@ ARCHITECTURE arch OF ExecutionStage IS
             outputt : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
             flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0));
     END COMPONENT;
-
     SIGNAL op1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL op2 : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL abbas : STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -136,6 +141,7 @@ BEGIN
             ALUres <= (OTHERS => '0');
             DISABLE_FORWARDING <= '0';
             IS_STORE_OP <= '0';
+            OUT_MEM_BRANCH <= (OTHERS => '0');
         ELSIF rising_edge(clk) THEN
             out_port_en_out <= out_port_en;
             memValueout <= memValuein;
@@ -154,7 +160,8 @@ BEGIN
             ALUres <= ALUtemp;
             DISABLE_FORWARDING <= IN_DISABLE_FORWARDING;
             IS_STORE_OP <= IN_IS_STORE_OP;
+            OUT_MEM_BRANCH <= IN_MEM_BRANCH;
         END IF;
     END PROCESS;
-
+    OUT_EX_BRANCH <= IN_EX_BRANCH;
 END ARCHITECTURE;

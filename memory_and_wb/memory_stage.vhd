@@ -66,7 +66,9 @@ port(
 	-- exception handler pc
 	Exception_Handler: out std_logic_vector(31 downto 0);
 	-- is_exception OR NOT
-	EXCEPTION: OUT STD_LOGIC
+	EXCEPTION: OUT STD_LOGIC;
+	MEM_BRANCH : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
+	OUT_MEM_BRANCH :OUT STD_LOGIC_VECTOR (1 DOWNTO 0)
 );
 END memory_stage;
 
@@ -244,5 +246,6 @@ BEGIN
 		mem_out); 
 	Exception_Handler<=	mem_out when IS_EX='1';
 	EXCEPTION<= IS_EX;
+	OUT_MEM_BRANCH 	<= MEM_BRANCH ;
 END mem_arch;
 
