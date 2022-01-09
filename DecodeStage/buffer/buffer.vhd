@@ -15,7 +15,7 @@ ARCHITECTURE
 BEGIN
     PROCESS (clk, rst)
     BEGIN
-        IF (rst = '1') THEN
+        IF (rising_edge(clk) AND rst = '1') THEN
             q <= '0';
         ELSIF (rising_edge(clk) AND rst = '0') THEN
             q <= d;

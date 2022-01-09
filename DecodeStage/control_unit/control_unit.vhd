@@ -36,7 +36,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         
@@ -49,7 +49,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -62,7 +62,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -75,7 +75,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -89,7 +89,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -103,7 +103,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -117,7 +117,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -131,7 +131,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -144,7 +144,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -157,7 +157,7 @@ BEGIN
         MUX_10 <= '0';
         OUT_EX_BRANCH <= "000";
         OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '1';
+        IF_Flush <= '0';
         ID_Flush <= '1';
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
@@ -191,7 +191,7 @@ BEGIN
                 IS_STORE_OP <= '0';
         
                 ELSIF (OP_CODE = "00010") THEN ---SETC
-                Control_Signals <= "0000000000000000000";
+                Control_Signals <= "0000000000011110000";
                 MUX_1 <= "00";
                 MUX_5 <= "00";
                 MUX_10 <= '0';
@@ -389,8 +389,8 @@ BEGIN
         
                 ELSIF (OP_CODE = "10001") THEN ---JZ
                 Control_Signals <= "0000000000010000000";
-                MUX_1 <= "10";
-                MUX_5 <= "00";
+                MUX_1 <= "00";
+                MUX_5 <= "01";
                 OUT_EX_BRANCH <= "001";
                 OUT_MEM_BRANCH <= "00";
                 MUX_10 <= '0';
@@ -402,10 +402,10 @@ BEGIN
         
                 ELSIF (OP_CODE = "10010") THEN ---JN
                 Control_Signals <= "0000000000010010000";
-                MUX_1 <= "10";
+                MUX_1 <= "00";
                 OUT_EX_BRANCH <= "010";
                 OUT_MEM_BRANCH <= "00";
-                MUX_5 <= "00";
+                MUX_5 <= "01";
                 MUX_10 <= '0';
                 IF_Flush <= IS_EXCEPTION;
                 ID_Flush <= IS_EXCEPTION;
@@ -417,8 +417,8 @@ BEGIN
                 OUT_EX_BRANCH <= "011";
                 OUT_MEM_BRANCH <= "00";
                 Control_Signals <= "0000000000010100000";
-                MUX_1 <= "10";
-                MUX_5 <= "00";
+                MUX_1 <= "00";
+                MUX_5 <= "01";
                 MUX_10 <= '0';
                 IF_Flush <= IS_EXCEPTION;
                 ID_Flush <= IS_EXCEPTION;
@@ -432,7 +432,7 @@ BEGIN
                 OUT_EX_BRANCH <= "100";
                 OUT_MEM_BRANCH <= "00";
                 MUX_1 <= "00";
-                MUX_5 <= "00";
+                MUX_5 <= "01";
                 MUX_10 <= '0';
                 IF_Flush <= IS_EXCEPTION;
                 ID_Flush <= IS_EXCEPTION;
