@@ -44,7 +44,8 @@ ENTITY EX_MEM_WB IS
     -- exception handler pc
     Exception_Handler_out: out std_logic_vector(31 downto 0);
     -- is_exception OR NOT
-    EXCEPTION_out: OUT STD_LOGIC
+    EXCEPTION_out: OUT STD_LOGIC;
+    mux_10_sel: IN STD_LOGIC
     );
 END EX_MEM_WB;
 
@@ -113,7 +114,8 @@ myforwarding_unit : entity work.ForwardingUnit port map(
     before_last_WB =>  WBout ,
     before_last_Rd => rdAddressout ,
     op1_mux => MUX_8_SEL ,
-    op2_mux =>  MUX_9_SEL
+    op2_mux =>  MUX_9_SEL,
+    mux_10_sel=>mux_10_sel
     );
     
 MEM_Stage : ENTITY work.memory_stage PORT MAP(

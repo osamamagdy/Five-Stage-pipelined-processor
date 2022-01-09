@@ -35,6 +35,7 @@ ARCHITECTURE arch OF Processor IS
         SIGNAL BACKUP_FLAG : STD_LOGIC_VECTOR(1 DOWNTO 0);
         SIGNAL RET         : STD_LOGIC ;
         SIGNAL OUT_PORT_EN : STD_LOGIC ;
+        SIGNAL mux_10_sel   : STD_LOGIC;
 
         -------Outputs From EX_MEM_WB Stage---------------------
         SIGNAL flags : STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -46,6 +47,8 @@ ARCHITECTURE arch OF Processor IS
         -- output of mux 4
         SIGNAL rd_data: std_logic_vector ( 31 downto 0);
         -- from alu result data
+        SIGNAL Exception_Handler_out: std_logic_vector ( 31 downto 0);
+        SIGNAL EXCEPTION_out: std_logic;
     
     
 
@@ -89,7 +92,11 @@ BEGIN
         -- output of mux 4
         rd_data => rd_data,
         -- from alu result data
-        output_port => output_port
+        output_port => output_port,
+        Exception_Handler_out => Exception_Handler_out,
+        EXCEPTION_out => EXCEPTION_out,
+        mux_10_sel=>mux_10_sel
+
     );
 
     Fetch_Decode_Stages : ENTITY work.Fetch_Decode PORT MAP(
@@ -134,6 +141,7 @@ BEGIN
         OUT_RS_ADD   => OUT_RS_ADD    ,
         OUT_RT_ADD   => OUT_RT_ADD    ,
         OUT_EX_FLUSH => OUT_EX_FLUSH  ,
+        mux_10_sel => mux_10_sel,
         OUT_DATA_FOR_STORE => OUT_DATA_FOR_STORE,
 
         -------Outputs from Control register

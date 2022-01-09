@@ -211,7 +211,7 @@ BEGIN
             EX_Flush <= '0';
         ELSIF (OP_CODE = "10111") THEN ---INT
             Control_Signals <= "0101101000100000010";
-            MUX_1 <= "10";
+            MUX_1 <= "01";
             MUX_5 <= "00";
             MUX_10 <= '0';
             IF_Flush <= '1';
