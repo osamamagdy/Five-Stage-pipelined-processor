@@ -38,6 +38,7 @@ ENTITY Fetch_Decode IS
         OUT_RT_ADD   : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
         OUT_EX_FLUSH : OUT STD_LOGIC;
         OUT_DATA_FOR_STORE : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+        mux_10_sel   : OUT STD_LOGIC;
 
         -------Outputs from Control register
         MEM_VAL     : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -126,6 +127,7 @@ BEGIN
         OUT_IF_FLUSH => FLUSH,
         HLT          => HLT,
         OUT_MUX_1    => MUX1_SEL,
+        mux_10_sel => mux_10_sel,
         OUT_DATA_FOR_STORE => OUT_DATA_FOR_STORE,
 
         -------Outputfrom Control register
