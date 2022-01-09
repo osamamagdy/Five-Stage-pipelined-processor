@@ -94,6 +94,7 @@ ARCHITECTURE arch OF EX_MEM_WB IS
     SIGNAL abbas_sel : STD_LOGIC_VECTOR (1 DOWNTO 0);
     SIGNAL M_DISABLE_FORWARDING : STD_LOGIC;
     SIGNAL M_IS_STORE_OP : STD_LOGIC;
+    SIGNAL MEM_BRANCH : STD_LOGIC_VECTOR (1 DOWNTO 0);
     ----
 BEGIN
 
@@ -119,7 +120,11 @@ BEGIN
         IN_DISABLE_FORWARDING,
         IN_IS_STORE_OP,
         M_DISABLE_FORWARDING,
-        M_IS_STORE_OP
+        M_IS_STORE_OP,
+        IN_EX_BRANCH,
+        IN_MEM_BRANCH,
+        OUT_EX_BRANCH,
+        MEM_BRANCH
         );
     myforwarding_unit : ENTITY work.ForwardingUnit PORT MAP(
         current_op1_address => rsAddress,
@@ -151,7 +156,9 @@ BEGIN
         signal_ret_output,
         signal_rd_address_output,
         Exception_Handler_out,
-        EXCEPTION_out
+        EXCEPTION_out,
+        MEM_BRANCH,
+        OUT_MEM_BRANCH
         );
 
     wb_input(54) <= wb_en;
