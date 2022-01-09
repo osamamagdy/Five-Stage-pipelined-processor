@@ -246,5 +246,6 @@ BEGIN
 		mem_out); 
 	Exception_Handler<=	mem_out when IS_EX='1';
 	EXCEPTION<= IS_EX;
+	OUT_MEM_BRANCH 	<= MEM_BRANCH ;
 END mem_arch;
 

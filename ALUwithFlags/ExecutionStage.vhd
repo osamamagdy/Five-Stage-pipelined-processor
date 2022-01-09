@@ -141,7 +141,6 @@ BEGIN
             ALUres <= (OTHERS => '0');
             DISABLE_FORWARDING <= '0';
             IS_STORE_OP <= '0';
-            OUT_EX_BRANCH <= (OTHERS => '0');
             OUT_MEM_BRANCH <= (OTHERS => '0');
         ELSIF rising_edge(clk) THEN
             out_port_en_out <= out_port_en;
@@ -161,9 +160,8 @@ BEGIN
             ALUres <= ALUtemp;
             DISABLE_FORWARDING <= IN_DISABLE_FORWARDING;
             IS_STORE_OP <= IN_IS_STORE_OP;
-            OUT_EX_BRANCH <= IN_EX_BRANCH;
             OUT_MEM_BRANCH <= IN_MEM_BRANCH;
         END IF;
     END PROCESS;
-
+    OUT_EX_BRANCH <= IN_EX_BRANCH;
 END ARCHITECTURE;
