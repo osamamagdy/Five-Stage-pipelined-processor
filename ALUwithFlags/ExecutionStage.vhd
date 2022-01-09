@@ -33,6 +33,7 @@ ENTITY ExecutionStage IS
         EX_MEM_ALURESULT : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
         MUX_8_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
         MUX_9_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
+        abbas_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
 
 
         -- Outputs
@@ -75,6 +76,7 @@ ARCHITECTURE arch OF ExecutionStage IS
 
     SIGNAL op1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL op2 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+    SIGNAL abbas : STD_LOGIC_VECTOR(15 DOWNTO 0);
 
     SIGNAL WBtemp : STD_LOGIC_VECTOR(1 DOWNTO 0);
     SIGNAL MEMtemp : STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -96,6 +98,13 @@ BEGIN
         MEM_WB_RD WHEN MUX_9_SEL = "01"
         ELSE
         secondOperand;
+
+    -----MUX Abbas SELECTOR  
+    abbas <= EX_MEM_ALURESULT WHEN abbas_SEL = "10"
+    ELSE
+    MEM_WB_RD WHEN abbas_SEL = "01"
+    ELSE
+    DATA_FOR_STORE;
 
     jumpAddress <= "0000000000000000" & op1;
     WBtemp <= WBin WHEN EXflush = '0'
@@ -133,7 +142,7 @@ BEGIN
             MemWr <= MEMtemp(0);
             SPOPout <= SPOPin;
             SPNUMout <= SPNUMin;
-            Rsrc1 <= DATA_FOR_STORE;
+            Rsrc1 <= abbas;
             RTIout <= RTIin;
             RETout <= RETin;
             PCout <= PCin;
