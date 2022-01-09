@@ -37,6 +37,16 @@ ARCHITECTURE arch OF Processor IS
         SIGNAL OUT_PORT_EN : STD_LOGIC ;
         SIGNAL mux_10_sel   : STD_LOGIC;
 
+        SIGNAL SIG_DISABLE_FORWARDING :STD_LOGIC;
+        SIGNAL SIG_IS_STORE_OP : STD_LOGIC;
+        SIGNAL SIG_EX_BRANCH : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL SIG_MEM_BRANCH :STD_LOGIC_VECTOR (1 DOWNTO 0);
+
+
+
+
+
+
         -------Outputs From EX_MEM_WB Stage---------------------
         SIGNAL flags : STD_LOGIC_VECTOR(2 DOWNTO 0);
         SIGNAL jumpAddress : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -49,6 +59,9 @@ ARCHITECTURE arch OF Processor IS
         -- from alu result data
         SIGNAL Exception_Handler_out: std_logic_vector ( 31 downto 0);
         SIGNAL EXCEPTION_out: std_logic;
+        SIGNAL SIG_IN_EX_BRANCH : STD_LOGIC_VECTOR (2 DOWNTO 0);
+        SIGNAL SIG_IN_MEM_BRANCH : STD_LOGIC_VECTOR (1 DOWNTO 0);
+
     
     
 
@@ -95,7 +108,18 @@ BEGIN
         output_port => output_port,
         Exception_Handler_out => Exception_Handler_out,
         EXCEPTION_out => EXCEPTION_out,
-        mux_10_sel=>mux_10_sel
+        mux_10_sel=>mux_10_sel,
+        
+        ----OUTPUTS THAT ENTER THE DECODE STAGE
+        OUT_EX_BRANCH =>  SIG_IN_EX_BRANCH ,
+        OUT_MEM_BRANCH=>  SIG_IN_MEM_BRANCH ,
+
+        -----INPUTS FROM THE DECODE STAGE
+        IN_DISABLE_FORWARDING =>     SIG_DISABLE_FORWARDING,
+        IN_IS_STORE_OP => SIG_IS_STORE_OP ,
+        IN_EX_BRANCH  => SIG_EX_BRANCH ,
+        IN_MEM_BRANCH => SIG_MEM_BRANCH
+
 
     );
 
@@ -124,6 +148,10 @@ BEGIN
 
         Flag_Reg =>  flags,
 
+        IN_EX_BRANCH =>  SIG_IN_EX_BRANCH ,
+        IN_MEM_BRANCH=>  SIG_IN_MEM_BRANCH ,
+
+
         -------------------Fetch inputs from outside-----------------------------
 
         JumpAddress => jumpAddress ,
@@ -143,6 +171,14 @@ BEGIN
         OUT_EX_FLUSH => OUT_EX_FLUSH  ,
         mux_10_sel => mux_10_sel,
         OUT_DATA_FOR_STORE => OUT_DATA_FOR_STORE,
+        
+        OUT_DISABLE_FORWARDING => SIG_DISABLE_FORWARDING,
+        OUT_IS_STORE_OP => SIG_IS_STORE_OP ,
+        OUT_EX_BRANCH  => SIG_EX_BRANCH ,
+        OUT_MEM_BRANCH => SIG_MEM_BRANCH ,
+
+
+
 
         -------Outputs from Control register
         MEM_VAL      => MEM_VAL       ,
