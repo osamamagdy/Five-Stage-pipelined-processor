@@ -24,13 +24,27 @@ ARCHITECTURE arch OF ForwardingUnit IS
     SIGNAL op2_equal_last : STD_LOGIC;
     SIGNAL op2_equal_before_last : STD_LOGIC;
     SIGNAL op2_equal_both : STD_LOGIC;
+
+    SIGNAL op1_address : STD_LOGIC_VECTOR(2 DOWNTO 0);
+    SIGNAL op2_address : STD_LOGIC_VECTOR(2 DOWNTO 0);
 BEGIN
+
+    op1_address <= current_op1_address WHEN
+        IN_IS_STORE_OP = '0'
+        ELSE
+        current_op2_address;
+
+    op2_address <= current_op1_address WHEN
+        IN_IS_STORE_OP = '0'
+        ELSE
+        current_op2_address;
+
     op1_equal_last <= '1' WHEN
-        current_op1_address = last_Rd
+        op1_address = last_Rd
         ELSE
         '0';
     op1_equal_before_last <= '1' WHEN
-        current_op1_address = before_last_Rd
+        op1_address = before_last_Rd
         ELSE
         '0';
     op1_equal_both <= '1' WHEN
@@ -39,11 +53,11 @@ BEGIN
         '0';
 
     op2_equal_last <= '1' WHEN
-        current_op2_address = last_Rd
+        op2_address = last_Rd
         ELSE
         '0';
     op2_equal_before_last <= '1' WHEN
-        current_op2_address = before_last_Rd
+        op2_address = before_last_Rd
         ELSE
         '0';
     op2_equal_both <= '1' WHEN

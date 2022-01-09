@@ -202,8 +202,12 @@ for line in f:
                 else:
                     src = line[2].replace('(', ' ').replace(')','').split()
                     #TODO: load and store
-                    binaryInstruction += Registers[line[1]]*2
-                    binaryInstruction += Registers[src[1]]
+                    if instuction == 'LDD':
+                        binaryInstruction += Registers[line[1]]
+                        binaryInstruction += Registers[src[1]]*2
+                    elif instuction == 'STD':
+                        binaryInstruction += Registers[line[1]]*2
+                        binaryInstruction += Registers[src[1]]
                     binaryInstruction += '0' * (INSTRUCTION_LEN - OPERAND_LEN - 3 * REGISTER_LEN)
                     imm = src[0]
                     imm = "{0:08b}".format(int(imm, 16))

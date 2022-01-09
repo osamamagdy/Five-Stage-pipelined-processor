@@ -46,7 +46,8 @@ ENTITY EX_MEM_WB IS
         -- is_exception OR NOT
         EXCEPTION_out : OUT STD_LOGIC;
         mux_10_sel : IN STD_LOGIC;
-
+        ------- modification for interrupt
+        mem_direct_out: OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
         ------Yarab modifications
         OUT_EX_BRANCH : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
         OUT_MEM_BRANCH : OUT STD_LOGIC_VECTOR (1 DOWNTO 0);
@@ -95,6 +96,8 @@ ARCHITECTURE arch OF EX_MEM_WB IS
     SIGNAL M_DISABLE_FORWARDING : STD_LOGIC;
     SIGNAL M_IS_STORE_OP : STD_LOGIC;
     ----
+    SIGNAL TEMP1: STD_LOGIC;
+    SIGNAL TEMP2: STD_LOGIC;
 BEGIN
 
     WB_EN_DUMMY <= (wb_en & alu_mem_output);
@@ -114,7 +117,8 @@ BEGIN
         abbas_sel,
         memValueout, memAddressout,
         nextPCout, WBout, MemRe, MemWr,
-        SPOPout, SPNUMout, Rsrc1, RTIout, RETout,
+        SPOPout, SPNUMout, Rsrc1, RTI_OUTPUT,
+        , RET_OUTPUT,
         PCout, rdAddressout, ALUres, flags, jumpAddress, out_port_en_exec_sig,
         IN_DISABLE_FORWARDING,
         IN_IS_STORE_OP,
@@ -170,12 +174,12 @@ BEGIN
         -- output 
         MEM_WB_RD_DATA,
         output_port,
-        RTI_OUTPUT,
-        RET_OUTPUT,
+        TEMP1,
+        TEMP2,
         Write_EN_OUT,
         RD_ADDRESS_OUTPUT
         );
 
     rd_data <= MEM_WB_RD_DATA;
-
+    mem_direct_out <= mem_out;
 END ARCHITECTURE;

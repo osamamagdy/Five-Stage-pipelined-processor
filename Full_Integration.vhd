@@ -62,7 +62,7 @@ ARCHITECTURE arch OF Processor IS
         SIGNAL SIG_IN_EX_BRANCH : STD_LOGIC_VECTOR (2 DOWNTO 0);
         SIGNAL SIG_IN_MEM_BRANCH : STD_LOGIC_VECTOR (1 DOWNTO 0);
 
-    
+        SIGNAL SIG_MUX_1 : STD_LOGIC_VECTORE (31 DOWNTO 0);
     
 
 BEGIN
@@ -119,7 +119,7 @@ BEGIN
         IN_IS_STORE_OP => SIG_IS_STORE_OP ,
         IN_EX_BRANCH  => SIG_EX_BRANCH ,
         IN_MEM_BRANCH => SIG_MEM_BRANCH
-
+        mem_direct_out=> SIG_MUX_1
 
     );
 
@@ -130,7 +130,7 @@ BEGIN
         clk   => clk ,
         ----------------Decode inputs from outside -----------------
         
-        IS_EXCEPTION => '0' ,   -----------?????????????????From Exception Unit when implemented 
+        IS_EXCEPTION => EXCEPTION_out ,   -----------?????????????????From Exception Unit when implemented 
         
         IN_RET => RTI_OUTPUT ,       
 
@@ -155,8 +155,8 @@ BEGIN
         -------------------Fetch inputs from outside-----------------------------
 
         JumpAddress => jumpAddress ,
-        Exception   => (OTHERS => '0' ),        -------????????????NOT yet implemented, came from Exception unit
-        Stack       => (OTHERS => '0' ),        -------????????????NOT yet implemented, came from Memory
+        Exception   => Exception_Handler_out,        -------????????????NOT yet implemented, came from Exception unit
+        Stack       => SIG_MUX_1        -------????????????NOT yet implemented, came from Memory
 
         MO_1 => (OTHERS => '0' ),               ------?????????????????NOT Used
         --

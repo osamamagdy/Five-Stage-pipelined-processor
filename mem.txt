@@ -139,9 +139,9 @@ mem load -skip 0 -filltype value -filldata 1000001001010100 -fillradix binary   
 mem load -skip 0 -filltype value -filldata 1000000000 -fillradix binary            -startaddress 779 -endaddress 779  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1000000100110100 -fillradix binary            -startaddress 780 -endaddress 780  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1000000001 -fillradix binary            -startaddress 781 -endaddress 781  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 0111101101110100 -fillradix binary            -startaddress 782 -endaddress 782  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 0111101110110100 -fillradix binary            -startaddress 782 -endaddress 782  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1000000001 -fillradix binary            -startaddress 783 -endaddress 783  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 0111110010010100 -fillradix binary            -startaddress 784 -endaddress 784  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 0111110010110100 -fillradix binary            -startaddress 784 -endaddress 784  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1000000000 -fillradix binary            -startaddress 785 -endaddress 785  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0110101101101100 -fillradix binary            -startaddress 786 -endaddress 786  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0100000101001100 -fillradix binary            -startaddress 787 -endaddress 787  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
