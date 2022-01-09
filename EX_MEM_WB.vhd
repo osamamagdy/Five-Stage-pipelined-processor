@@ -55,10 +55,7 @@ ENTITY EX_MEM_WB IS
         IN_DISABLE_FORWARDING : IN STD_LOGIC;
         IN_IS_STORE_OP : IN STD_LOGIC;
         IN_EX_BRANCH : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
-        IN_MEM_BRANCH : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
-
-        DISABLE_FORWARDING : IN STD_LOGIC;
-        IS_STORE_OP : IN STD_LOGIC
+        IN_MEM_BRANCH : IN STD_LOGIC_VECTOR (1 DOWNTO 0)
     );
 END EX_MEM_WB;
 
@@ -135,8 +132,8 @@ BEGIN
         op2_mux => MUX_9_SEL,
         abbas => abbas_sel,
         mux_10_sel => mux_10_sel,
-        DISABLE_FORWARDING => DISABLE_FORWARDING,
-        IS_STORE_OP => IS_STORE_OP
+        IN_DISABLE_FORWARDING => M_DISABLE_FORWARDING,
+        IN_IS_STORE_OP => M_IS_STORE_OP
         );
 
     MEM_Stage : ENTITY work.memory_stage PORT MAP(
