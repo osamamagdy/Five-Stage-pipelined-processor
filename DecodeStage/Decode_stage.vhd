@@ -62,6 +62,8 @@ ENTITY myDecode IS
         Write_EN : IN STD_LOGIC;
 
         Flag_Reg : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+        IN_EX_BRANCH : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+        IN_MEM_BRANCH : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
 
         -------Outputs
         OUT_PC       : OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
@@ -89,8 +91,12 @@ ENTITY myDecode IS
         BACKUP_FLAG        : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         RET                : OUT STD_LOGIC;
         OUT_PORT_EN        : OUT STD_LOGIC;
-        OUT_DATA_FOR_STORE : OUT STD_LOGIC_VECTOR(15 DOWNTO 0));
+        OUT_DATA_FOR_STORE : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 
+        OUT_DISABLE_FORWARDING : OUT STD_LOGIC;
+        OUT_IS_STORE_OP : OUT STD_LOGIC;
+        OUT_EX_BRANCH : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
+        OUT_MEM_BRANCH : OUT STD_LOGIC_VECTOR (1 DOWNTO 0));
 END ENTITY;
 ---------------------------------------------------------
 ARCHITECTURE my_Decode OF myDecode IS
@@ -107,6 +113,10 @@ ARCHITECTURE my_Decode OF myDecode IS
     SIGNAL Buffer_Input    : STD_LOGIC_VECTOR(18 DOWNTO 0);
     SIGNAL second_operand  : STD_LOGIC_VECTOR (15 DOWNTO 0);
     SIGNAL RS_DATA         : STD_LOGIC_VECTOR (15 DOWNTO 0);
+    SIGNAL SIG_DISABLE_FORWARDING : STD_LOGIC;
+    SIGNAL SIG_IS_STORE_OP : STD_LOGIC;
+    SIGNAL SIG_EX_BRANCH : STD_LOGIC_VECTOR (2 DOWNTO 0);
+    SIGNAL SIG_MEM_BRANCH : STD_LOGIC_VECTOR (1 DOWNTO 0);
 BEGIN
     myReg_file : ENTITY work.reg_file PORT MAP(
         CLK             => CLK,
@@ -126,6 +136,8 @@ BEGIN
         RTI             => IN_RTI,
         Flag_reg        => Flag_Reg,
         OP_CODE         => INSTRUCTION(31 DOWNTO 27),
+        IN_EX_BRANCH    => IN_EX_BRANCH,
+        IN_MEM_BRANCH   => IN_MEM_BRANCH,
         EX_Flush        => OUT_EX_FLUSH,
         ID_Flush        => OR_gate_in,
         MUX_10          => mux_10_selector,
@@ -133,7 +145,11 @@ BEGIN
         HLT             => HLT,
         MUX_5           => mux_5_selector,
         MUX_1           => OUT_MUX_1,
-        Control_Signals => CONTROL_SIGNALS
+        Control_Signals => CONTROL_SIGNALS,
+        DISABLE_FORWARDING =>SIG_DISABLE_FORWARDING ,
+        IS_STORE_OP=>SIG_IS_STORE_OP ,
+        OUT_EX_BRANCH => SIG_EX_BRANCH ,
+        OUT_MEM_BRANCH => SIG_MEM_BRANCH 
         );
 
     OR_gate_out <= (OR_gate_in OR IS_HAZARD);
@@ -176,7 +192,10 @@ BEGIN
         IN_RS_ADD         => INSTRUCTION(23 DOWNTO 21),
         IN_RT_ADD         => INSTRUCTION(20 DOWNTO 18),
         IN_DATA_FOR_STORE => reg_file_out1,
-
+        IN_DISABLE_FORWARDING =>  SIG_DISABLE_FORWARDING,
+        IN_IS_STORE_OP => SIG_IS_STORE_OP,
+        IN_EX_BRANCH => SIG_EX_BRANCH ,
+        IN_MEM_BRANCH => SIG_MEM_BRANCH,
         -------Outputs
         OUT_PC             => OUT_PC,
         OUT_NEXT_PC        => OUT_NEXT_PC,
@@ -198,7 +217,10 @@ BEGIN
         RTI         => RTI,
         BACKUP_FLAG => BACKUP_FLAG,
         RET         => RET,
-        OUT_PORT_EN => OUT_PORT_EN
-
+        OUT_PORT_EN => OUT_PORT_EN,
+        OUT_DISABLE_FORWARDING =>    OUT_DISABLE_FORWARDING , 
+        OUT_IS_STORE_OP =>    OUT_IS_STORE_OP ,
+        OUT_EX_BRANCH =>    OUT_EX_BRANCH ,
+        OUT_MEM_BRANCH =>    OUT_MEM_BRANCH
         );
 END ARCHITECTURE;

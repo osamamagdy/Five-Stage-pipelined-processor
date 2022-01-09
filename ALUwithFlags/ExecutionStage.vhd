@@ -5,8 +5,8 @@ ENTITY ExecutionStage IS
     PORT (
         -- Inputs
         clk : IN STD_LOGIC;
-	-- to enable writing on output port
-	out_port_en: IN std_Logic;
+        -- to enable writing on output port
+        out_port_en : IN STD_LOGIC;
         reset : IN STD_LOGIC;
         memValuein : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         memAddressin : IN STD_LOGIC;
@@ -28,14 +28,12 @@ ENTITY ExecutionStage IS
         RETin : IN STD_LOGIC;
         EXflush : IN STD_LOGIC;
 
-    ---------Forwarding Unit : Requires a mux for op1 and op2 with the selector from forwarding unit 
+        ---------Forwarding Unit : Requires a mux for op1 and op2 with the selector from forwarding unit 
         MEM_WB_RD : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
         EX_MEM_ALURESULT : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
         MUX_8_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
         MUX_9_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
         abbas_SEL : IN STD_LOGIC_VECTOR (1 DOWNTO 0);
-
-
         -- Outputs
         memValueout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         memAddressout : OUT STD_LOGIC;
@@ -55,9 +53,13 @@ ENTITY ExecutionStage IS
         flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
         -- jump
         jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-	-- to enable writing on output port
-	out_port_en_out: OUT STD_LOGIC
-);
+        -- to enable writing on output port
+        out_port_en_out : OUT STD_LOGIC;
+        IN_DISABLE_FORWARDING : IN STD_LOGIC;
+        IN_IS_STORE_OP : IN STD_LOGIC;
+        DISABLE_FORWARDING : OUT STD_LOGIC;
+        IS_STORE_OP : OUT STD_LOGIC
+    );
 END ExecutionStage;
 
 ARCHITECTURE arch OF ExecutionStage IS
@@ -86,12 +88,12 @@ BEGIN
     aluF : ALUwithFlags PORT MAP(op1, op2, EX, RTIin, clk, BackupFlag(0), reset, ALUtemp, flags);
 
     ------MUX 8 SELECTOR
-     op1 <= EX_MEM_ALURESULT WHEN MUX_8_SEL = "10"
+    op1 <= EX_MEM_ALURESULT WHEN MUX_8_SEL = "10"
         ELSE
         MEM_WB_RD WHEN MUX_8_SEL = "01"
         ELSE
         RSdata;
-             
+
     -----MUX 9 SELECTOR         
     op2 <= EX_MEM_ALURESULT WHEN MUX_9_SEL = "10"
         ELSE
@@ -101,10 +103,10 @@ BEGIN
 
     -----MUX Abbas SELECTOR  
     abbas <= MEM_WB_RD WHEN abbas_SEL = "10"
-    ELSE
-    EX_MEM_ALURESULT WHEN abbas_SEL = "01"
-    ELSE
-    DATA_FOR_STORE;
+        ELSE
+        EX_MEM_ALURESULT WHEN abbas_SEL = "01"
+        ELSE
+        DATA_FOR_STORE;
 
     jumpAddress <= "0000000000000000" & op1;
     WBtemp <= WBin WHEN EXflush = '0'
@@ -117,7 +119,7 @@ BEGIN
     backup : PROCESS (clk, reset)
     BEGIN
         IF reset = '1' THEN
-            out_port_en_out<='0';
+            out_port_en_out <= '0';
             memValueout <= (OTHERS => '0');
             memAddressout <= '0';
             nextPCout <= (OTHERS => '0');
@@ -132,8 +134,10 @@ BEGIN
             PCout <= (OTHERS => '0');
             rdAddressout <= (OTHERS => '0');
             ALUres <= (OTHERS => '0');
+            DISABLE_FORWARDING <= '0';
+            IS_STORE_OP <= '0';
         ELSIF rising_edge(clk) THEN
-	    out_port_en_out<=out_port_en;
+            out_port_en_out <= out_port_en;
             memValueout <= memValuein;
             memAddressout <= memAddressin;
             nextPCout <= nextPCin;
@@ -148,6 +152,8 @@ BEGIN
             PCout <= PCin;
             rdAddressout <= rdAddressin;
             ALUres <= ALUtemp;
+            DISABLE_FORWARDING <= IN_DISABLE_FORWARDING;
+            IS_STORE_OP <= IN_IS_STORE_OP;
         END IF;
     END PROCESS;
 
