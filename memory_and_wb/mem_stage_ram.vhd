@@ -51,11 +51,11 @@ ARCHITECTURE memStageRamArch OF memStageRam IS
 	extend_alu: sign_extend GENERIC MAP(32) PORT MAP( mem_out,mem_extended);
 	-----------------------------------
 
-	mem_out<=ram(to_integer(unsigned(address))) WHEN re='1' and (mem_Address = '0' or ( mem_Address = '1' and sp_num ='0'));
+	mem_out<=ram(to_integer(unsigned(address))) WHEN is_exception ='0' and re='1' and (mem_Address = '0' or ( mem_Address = '1' and sp_num ='0'));
     
-	dataout <= ram(3)&ram(2) WHEN is_exception='1' and mem_Address='0' 
+	dataout <= ram(5)&ram(4) WHEN is_exception='1' and mem_Address='0' 
 	
-	ELSE ram(5)&ram(4) WHEN is_exception='1' and mem_Address='1'
+	ELSE ram(3)&ram(2) WHEN is_exception='1' and mem_Address='1'
 	ELSE ram(to_integer(unsigned(int_index))+1)&ram(to_integer(unsigned(int_index)))
 	WHEN is_int="01"
 	ELSE ram(to_integer(unsigned(address))-1)&ram(to_integer(unsigned(address)))

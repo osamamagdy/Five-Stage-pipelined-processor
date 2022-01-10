@@ -8,12 +8,14 @@ sim:/processor/Fetch_Decode_Stages/myfetch/IR
 add wave -position insertpoint  \
 sim:/processor/Fetch_Decode_Stages/myfetch/JumpAddress
 add wave -position insertpoint  \
+sim:/processor/Fetch_Decode_Stages/myfetch/Exception \
+sim:/processor/Fetch_Decode_Stages/myfetch/Stack
+add wave -position insertpoint  \
 sim:/processor/IN_PORT
 add wave -position insertpoint  \
 sim:/processor/EX_MEM_WB_Stages/EX_Stage/flags
 add wave -position insertpoint  \
 sim:/processor/Fetch_Decode_Stages/mydecode/myReg_file/SIGNAL_FROM_FF
-
 
 
 mem load -skip 0 -filltype value -filldata 00000 -fillradix hexadecimal -startaddress 0 -endaddress 7 /processor/Fetch_Decode_Stages/mydecode/myReg_file/SIGNAL_FROM_FF
@@ -27,8 +29,8 @@ mem load -skip 0 -filltype value -filldata 0000010001010000 -fillradix binary   
 mem load -skip 0 -filltype value -filldata 0000000000000000 -fillradix binary            -startaddress 5 -endaddress 5  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram
 mem load -skip 0 -filltype value -filldata 0000001000000000 -fillradix binary            -startaddress 6 -endaddress 6  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram
 mem load -skip 0 -filltype value -filldata 0000000000000000 -fillradix binary            -startaddress 7 -endaddress 7  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram
-mem load -skip 0 -filltype value -filldata 0000001001010000 -fillradix binary            -startaddress 8 -endaddress 8  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram
-mem load -skip 0 -filltype value -filldata 0000000000000000 -fillradix binary            -startaddress 9 -endaddress 9  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram
+mem load -skip 0 -filltype value -filldata 0000001001010000 -fillradix binary            -startaddress 18 -endaddress 18  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram
+mem load -skip 0 -filltype value -filldata 0000000000000000 -fillradix binary            -startaddress 19 -endaddress 19  /processor/EX_MEM_WB_Stages/MEM_Stage/DataMemAndStack/ram
 mem load -skip 0 -filltype value -filldata 0101000000000000 -fillradix binary            -startaddress 512 -endaddress 512  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0010111011011000 -fillradix binary            -startaddress 513 -endaddress 513  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1100000000000000 -fillradix binary            -startaddress 514 -endaddress 514  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
@@ -42,7 +44,7 @@ mem load -skip 0 -filltype value -filldata 0011001101101100 -fillradix binary   
 mem load -skip 0 -filltype value -filldata 0011010010010000 -fillradix binary            -startaddress 19 -endaddress 19  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0110010010010000 -fillradix binary            -startaddress 20 -endaddress 20  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1011100000000000 -fillradix binary            -startaddress 21 -endaddress 21  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 0000000000001000 -fillradix binary            -startaddress 22 -endaddress 22  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 0000000000010010 -fillradix binary            -startaddress 22 -endaddress 22  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1010000100100100 -fillradix binary            -startaddress 23 -endaddress 23  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0010000100100100 -fillradix binary            -startaddress 24 -endaddress 24  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0101010100110100 -fillradix binary            -startaddress 48 -endaddress 48  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
