@@ -22,7 +22,7 @@ port(
 	-- INPUT[3]-> ret: in std_logic;
 	-- rd address: the destination register, to enter the forwarding unit
 	-- INPUT[2:0]-> rd_address_output: in std_logic_vector(2 downto 0);
-	input: IN std_logic_vector( 54 downto 0 );
+	input: IN std_logic_vector( 56 downto 0 );
 	-- output of mux 14
 	rd_data: OUT std_logic_vector ( 31 downto 0);
 	-- from alu result data

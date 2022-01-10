@@ -57,6 +57,7 @@ port(
 	alu_res_out: out std_logic_vector(15 downto 0);
 	-- memory output
 	mem: out std_logic_vector(31 downto 0);
+	mem_direct_out: out std_logic_vector(31 downto 0);
 	-- ret interrupt enable
 	rti_output: out std_logic;
 	-- ret from call enable
@@ -95,8 +96,8 @@ PORT (
 	-- INPUT[3]-> ret: in std_logic;
 	-- rd address: the destination register, to enter the forwarding unit
 	-- INPUT[2:0]-> rd_address_output: in std_logic_vector(2 downto 0);
-	input: IN std_logic_vector( 55 downto 0 );
-    output : OUT std_logic_vector( 55 downto 0 ));
+	input: IN std_logic_vector( 57 downto 0 );
+    output : OUT std_logic_vector( 57 downto 0 ));
 END Component;
 
 Component memStageRam IS
@@ -109,6 +110,7 @@ Component memStageRam IS
 		is_exception: In std_logic;
 		is_int: IN std_logic_vector(1 downto 0);
 		address : IN  std_logic_vector(31 DOWNTO 0); 
+		int_index : IN std_logic_vector(31 DOWNTO 0);
 		datain  : IN  std_logic_vector(31 DOWNTO 0); -- databus width
 		dataout : OUT std_logic_vector(31 DOWNTO 0)); 
 END Component;
@@ -166,8 +168,8 @@ END Component;
 
 
 ---- Signals ----
-SIGNAL q: std_logic_vector(55 downto 0); -- buffer input
-SIGNAL d: std_logic_vector(55 downto 0); -- buffer output
+SIGNAL q: std_logic_vector(57 downto 0); -- buffer input
+SIGNAL d: std_logic_vector(57 downto 0); -- buffer output
 SIGNAL alu_extended: std_logic_vector(31 downto 0); --alu result
 SIGNAL r_src1_extended: std_logic_vector(31 downto 0); 
 SIGNAL memory_datain: std_logic_vector(31 downto 0); 
@@ -183,6 +185,7 @@ SIGNAL EPC_out: std_logic_vector(31 downto 0);
 SIGNAL mem_out: std_logic_vector(31 downto 0); 
 BEGIN
 	-- writing to the mem/wb buffer
+	q(57 DOWNTO 56) <= MEM_BRANCH;
 	q(55)<=out_port_en;
 	q(54 downto 53)<= wb;
 	q(52 downto 37)<= alu_res;
@@ -191,6 +194,7 @@ BEGIN
 	q(3)<= ret;
 	q(2 downto 0)<= rd_address;
 	-- getting output of the mem/wb buffer
+	OUT_MEM_BRANCH <= d(57 DOWNTO 56);
 	out_port_en_out<=d(55);
 	wb_en<= d(54);
 	alu_mem_output<= d(53);
@@ -247,10 +251,11 @@ BEGIN
 		IS_EX,
 		backup,
 		memory_address_in,
+		alu_extended,
 		memory_datain,
 		mem_out); 
+	mem_direct_out <= mem_out;
 	Exception_Handler<=	mem_out when IS_EX='1';
 	EXCEPTION<= IS_EX;
-	OUT_MEM_BRANCH 	<= MEM_BRANCH ;
 END mem_arch;
 

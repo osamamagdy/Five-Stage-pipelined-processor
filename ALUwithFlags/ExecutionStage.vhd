@@ -51,6 +51,7 @@ ENTITY ExecutionStage IS
         -- ALU
         ALUres : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
         flags : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+        OUT_BackupFlag : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         -- jump
         jumpAddress : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
         -- to enable writing on output port
@@ -143,6 +144,7 @@ BEGIN
             IS_STORE_OP <= '0';
             OUT_MEM_BRANCH <= (OTHERS => '0');
             OUT_EX_BRANCH <= (OTHERS => '0');
+            OUT_BackupFlag <= (OTHERS => '0');
         ELSIF rising_edge(clk) THEN
             out_port_en_out <= out_port_en;
             memValueout <= memValuein;
@@ -159,6 +161,7 @@ BEGIN
             PCout <= PCin;
             rdAddressout <= rdAddressin;
             ALUres <= ALUtemp;
+            OUT_BackupFlag <= BackupFlag;
             DISABLE_FORWARDING <= IN_DISABLE_FORWARDING;
             IS_STORE_OP <= IN_IS_STORE_OP;
             OUT_MEM_BRANCH <= IN_MEM_BRANCH;

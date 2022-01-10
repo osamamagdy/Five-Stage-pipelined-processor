@@ -1,5 +1,7 @@
 vsim -gui work.processor
 add wave -position insertpoint  \
+sim:/processor/clk
+add wave -position insertpoint  \
 sim:/processor/Fetch_Decode_Stages/myfetch/pcOut
 add wave -position insertpoint  \
 sim:/processor/Fetch_Decode_Stages/myfetch/IR
@@ -12,18 +14,7 @@ sim:/processor/EX_MEM_WB_Stages/EX_Stage/flags
 add wave -position insertpoint  \
 sim:/processor/Fetch_Decode_Stages/mydecode/myReg_file/SIGNAL_FROM_FF
 
-add wave -position insertpoint sim:/processor/*
-add wave -position insertpoint sim:/processor/EX_MEM_WB_Stages/*
-add wave -position insertpoint sim:/processor/Fetch_Decode_Stages/*
 
-add wave -position insertpoint  \
-sim:/processor/EX_MEM_WB_Stages/MEM_Stage/*
-
-
-add wave -position insertpoint  \
-sim:/processor/clk
-add wave -position insertpoint  \
-sim:/processor/EX_MEM_WB_Stages/MEM_Stage/backup
 
 mem load -skip 0 -filltype value -filldata 00000 -fillradix hexadecimal -startaddress 0 -endaddress 7 /processor/Fetch_Decode_Stages/mydecode/myReg_file/SIGNAL_FROM_FF
 
@@ -52,22 +43,22 @@ mem load -skip 0 -filltype value -filldata 0011010010010000 -fillradix binary   
 mem load -skip 0 -filltype value -filldata 0110010010010000 -fillradix binary            -startaddress 20 -endaddress 20  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1011100000000000 -fillradix binary            -startaddress 21 -endaddress 21  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0000000000001000 -fillradix binary            -startaddress 22 -endaddress 22  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 1010000100000000 -fillradix binary            -startaddress 23 -endaddress 23  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 1010000100100100 -fillradix binary            -startaddress 23 -endaddress 23  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0010000100100100 -fillradix binary            -startaddress 24 -endaddress 24  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0101010100110100 -fillradix binary            -startaddress 48 -endaddress 48  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 1000101000000000 -fillradix binary            -startaddress 49 -endaddress 49  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 1000101001001000 -fillradix binary            -startaddress 49 -endaddress 49  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0001000000000000 -fillradix binary            -startaddress 50 -endaddress 50  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 1000100100000000 -fillradix binary            -startaddress 80 -endaddress 80  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 1001101100000000 -fillradix binary            -startaddress 81 -endaddress 81  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 1000100100100100 -fillradix binary            -startaddress 80 -endaddress 80  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 1001101101101100 -fillradix binary            -startaddress 81 -endaddress 81  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0001110110110100 -fillradix binary            -startaddress 82 -endaddress 82  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 1011100000000000 -fillradix binary            -startaddress 83 -endaddress 83  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0000000000000110 -fillradix binary            -startaddress 84 -endaddress 84  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0011011011011000 -fillradix binary            -startaddress 85 -endaddress 85  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 1001011000000000 -fillradix binary            -startaddress 86 -endaddress 86  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 1001011011011000 -fillradix binary            -startaddress 86 -endaddress 86  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0010000100100100 -fillradix binary            -startaddress 87 -endaddress 87  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0001000000000000 -fillradix binary            -startaddress 1792 -endaddress 1792  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0110111011011000 -fillradix binary            -startaddress 1793 -endaddress 1793  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
-mem load -skip 0 -filltype value -filldata 1010111000000000 -fillradix binary            -startaddress 1794 -endaddress 1794  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
+mem load -skip 0 -filltype value -filldata 1010111011011000 -fillradix binary            -startaddress 1794 -endaddress 1794  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0010011011011000 -fillradix binary            -startaddress 1795 -endaddress 1795  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0000000000000000 -fillradix binary            -startaddress 1796 -endaddress 1796  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram
 mem load -skip 0 -filltype value -filldata 0000000000000000 -fillradix binary            -startaddress 1797 -endaddress 1797  processor/Fetch_Decode_Stages/myfetch/INSTRUC_MEM/ram

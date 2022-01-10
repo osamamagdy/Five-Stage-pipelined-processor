@@ -86,7 +86,8 @@ ARCHITECTURE arch OF EX_MEM_WB IS
     SIGNAL signal_rd_address_output : STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL out_port_en_exec_sig : STD_LOGIC;
     SIGNAL out_port_en_mem_sig : STD_LOGIC;
-    SIGNAL wb_input : STD_LOGIC_VECTOR(54 DOWNTO 0);
+    SIGNAL wb_input : STD_LOGIC_VECTOR(56 DOWNTO 0);
+    SIGNAL SIG_BACKUPFLAG : STD_LOGIC_VECTOR(1 DOWNTO 0);
     --SIGNAL FOR FORWARDING UNIT
     SIGNAL MUX_8_SEL : STD_LOGIC_VECTOR (1 DOWNTO 0);
     SIGNAL MUX_9_SEL : STD_LOGIC_VECTOR (1 DOWNTO 0);
@@ -120,7 +121,7 @@ BEGIN
         nextPCout, WBout, MemRe, MemWr,
         SPOPout, SPNUMout, Rsrc1, RTI_OUTPUT,
         RET_OUTPUT,
-        PCout, rdAddressout, ALUres, flags, jumpAddress, out_port_en_exec_sig,
+        PCout, rdAddressout, ALUres, flags, SIG_BACKUPFLAG , jumpAddress, out_port_en_exec_sig,
         IN_DISABLE_FORWARDING,
         IN_IS_STORE_OP,
         M_DISABLE_FORWARDING,
@@ -149,13 +150,14 @@ BEGIN
         clk, out_port_en_exec_sig, flush_mem_Wb, reset, memValueout,
         memAddressout, nextPCout, WBout, MemRe,
         MemWr, SPOPout, SPNUMout, Rsrc1, ALUres,
-        RTIout, RETout, PCout, rdAddressout, "00",
+        RTIout, RETout, PCout, rdAddressout, SIG_BACKUPFLAG,
         -- Outputs
         out_port_en_mem_sig,
         wb_en,
         alu_mem_output,
         alu_res_out,
         mem_out,
+        mem_direct_out,
         signal_rti_output,
         signal_ret_output,
         signal_rd_address_output,
@@ -188,5 +190,4 @@ BEGIN
         );
 
     rd_data <= MEM_WB_RD_DATA;
-    mem_direct_out <= mem_out;
 END ARCHITECTURE;

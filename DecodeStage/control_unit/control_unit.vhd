@@ -42,7 +42,20 @@ BEGIN
         
         DISABLE_FORWARDING <= '0';
         IS_STORE_OP <= '0';
-        ELSIF ( IN_MEM_BRANCH = "01" ) THEN --call
+        ELSIF ( IN_EX_BRANCH = "101" ) THEN --call
+        Control_Signals <= "0000000000000000000";
+        MUX_1 <= "01";
+        MUX_5 <= "00";
+        MUX_10 <= '0';
+        OUT_EX_BRANCH <= "000";
+        OUT_MEM_BRANCH <= "00";
+        IF_Flush <= '0';
+        ID_Flush <= '1';
+        EX_Flush <= '0';
+        DISABLE_FORWARDING <= '0';
+        IS_STORE_OP <= '0';
+
+        ELSIF ( IN_MEM_BRANCH = "10" ) THEN --INT INDEX
         Control_Signals <= "0000000000000000000";
         MUX_1 <= "11";
         MUX_5 <= "00";
@@ -54,33 +67,6 @@ BEGIN
         EX_Flush <= '1';
         DISABLE_FORWARDING <= '0';
         IS_STORE_OP <= '0';
-
-        ELSIF ( IN_MEM_BRANCH = "10" ) THEN --INT0
-        Control_Signals <= "0000000000000000000";
-        MUX_1 <= "11";
-        MUX_5 <= "00";
-        MUX_10 <= '0';
-        OUT_EX_BRANCH <= "000";
-        OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '0';
-        ID_Flush <= '1';
-        EX_Flush <= '1';
-        DISABLE_FORWARDING <= '0';
-        IS_STORE_OP <= '0';
-
-        ELSIF ( IN_MEM_BRANCH = "11" ) THEN --INT1
-        Control_Signals <= "0000000000000000000";
-        MUX_1 <= "11";
-        MUX_5 <= "00";
-        MUX_10 <= '0';
-        OUT_EX_BRANCH <= "000";
-        OUT_MEM_BRANCH <= "00";
-        IF_Flush <= '0';
-        ID_Flush <= '1';
-        EX_Flush <= '1';
-        DISABLE_FORWARDING <= '0';
-        IS_STORE_OP <= '0';
-
 
         ELSIF ( RET = '1' ) THEN --RET
         Control_Signals <= "0000000000000000000";
@@ -119,7 +105,7 @@ BEGIN
         OUT_MEM_BRANCH <= "00";
         IF_Flush <= '0';
         ID_Flush <= '1';
-        EX_Flush <= '1';
+        EX_Flush <= '0';
         DISABLE_FORWARDING <= '0';
         IS_STORE_OP <= '0';
 
@@ -133,7 +119,7 @@ BEGIN
         OUT_MEM_BRANCH <= "00";
         IF_Flush <= '0';
         ID_Flush <= '1';
-        EX_Flush <= '1';
+        EX_Flush <= '0';
         DISABLE_FORWARDING <= '0';
         IS_STORE_OP <= '0';
 
@@ -146,7 +132,7 @@ BEGIN
         OUT_MEM_BRANCH <= "00";
         IF_Flush <= '0';
         ID_Flush <= '1';
-        EX_Flush <= '1';
+        EX_Flush <= '0';
         DISABLE_FORWARDING <= '0';
         IS_STORE_OP <= '0';
 
@@ -159,7 +145,7 @@ BEGIN
         OUT_MEM_BRANCH <= "00";
         IF_Flush <= '0';
         ID_Flush <= '1';
-        EX_Flush <= '1';
+        EX_Flush <= '0';
         DISABLE_FORWARDING <= '0';
         IS_STORE_OP <= '0';
 
@@ -443,9 +429,9 @@ BEGIN
                 ELSIF (OP_CODE = "10101") THEN ---CALL
                 Control_Signals <= "0101101000100000000";
                 MUX_1 <= "00";
-                OUT_EX_BRANCH <= "000";
-                OUT_MEM_BRANCH <= "01";
-                MUX_5 <= "00";
+                OUT_EX_BRANCH <= "101";
+                OUT_MEM_BRANCH <= "00";
+                MUX_5 <= "01";
                 MUX_10 <= '0';
                 IF_Flush <= IS_EXCEPTION;
                 ID_Flush <= IS_EXCEPTION;
@@ -467,32 +453,21 @@ BEGIN
                 IS_STORE_OP <= '0';
         
 
-                ELSIF (OP_CODE = "10111") THEN ---INT0
-                Control_Signals <= "0101101000100000010";
+                ELSIF (OP_CODE = "10111") THEN ---INT INDEX
+                Control_Signals <= "0101101000101110010";
                 MUX_1 <= "00";
                 OUT_EX_BRANCH <= "000";
                 OUT_MEM_BRANCH <= "10";
                 MUX_5 <= "00";
-                MUX_10 <= '0';
-                IF_Flush <= '1';
-                ID_Flush <= '1';
-                EX_Flush <= '1';
+                MUX_10 <= '1';
+                IF_Flush <= '0';
+                ID_Flush <= '0';
+                EX_Flush <= '0';
                 DISABLE_FORWARDING <= '0';
                 IS_STORE_OP <= '0';
         
-                ELSIF (OP_CODE = "11001") THEN ---INT1
-                Control_Signals <= "0101101000100000010";
-                MUX_1 <= "00";
-                OUT_EX_BRANCH <= "000";
-                OUT_MEM_BRANCH <= "11";
-                MUX_5 <= "00";
-                MUX_10 <= '0';
-                IF_Flush <= '1';
-                ID_Flush <= '1';
-                EX_Flush <= '1';
-                DISABLE_FORWARDING <= '0';
-                IS_STORE_OP <= '0';
-        
+
+                
                 ELSIF (OP_CODE = "11000") THEN ---RTI
                 Control_Signals <= "0001111111000001100";
                 MUX_1 <= "00";
@@ -505,7 +480,21 @@ BEGIN
                 EX_Flush <= '0';
                 DISABLE_FORWARDING <= '0';
                 IS_STORE_OP <= '0';
-        
+
+                else
+                Control_Signals <= "0000000000000000000";
+                MUX_1 <= "00";
+                OUT_EX_BRANCH <= "000";
+                OUT_MEM_BRANCH <= "00";
+                MUX_5 <= "00";
+                MUX_10 <= '0';
+                IF_Flush <= '0';
+                ID_Flush <= '0';
+                EX_Flush <= '0';
+                DISABLE_FORWARDING <= '0';
+                IS_STORE_OP <= '0';
+                    
+
                 END IF;
         END IF;
 

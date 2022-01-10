@@ -15,6 +15,7 @@ ENTITY memStageRam IS
 		is_exception: In std_logic;
 		is_int: IN std_logic_vector(1 downto 0);
 		address : IN  std_logic_vector(31 DOWNTO 0); 
+		int_index : IN std_logic_vector(31 DOWNTO 0);
 		datain  : IN  std_logic_vector(31 DOWNTO 0); -- databus width
 		dataout : OUT std_logic_vector(31 DOWNTO 0)); 
 END ENTITY memStageRam;
@@ -55,8 +56,10 @@ ARCHITECTURE memStageRamArch OF memStageRam IS
 	dataout <= ram(3)&ram(2) WHEN is_exception='1' and mem_Address='0' 
 	
 	ELSE ram(5)&ram(4) WHEN is_exception='1' and mem_Address='1'
-	ELSE ram(to_integer(unsigned(address))+1)&ram(to_integer(unsigned(address)))
-	WHEN is_int="01" or (re='1' and mem_Address = '1' and sp_num ='1')
+	ELSE ram(to_integer(unsigned(int_index))+1)&ram(to_integer(unsigned(int_index)))
+	WHEN is_int="01"
+	ELSE ram(to_integer(unsigned(address))-1)&ram(to_integer(unsigned(address)))
+	WHEN (re='1' and mem_Address = '1' and sp_num ='1')
 	ELSE mem_extended 
 	WHEN re='1' and (mem_Address = '0' or ( mem_Address = '1' and sp_num ='0'))
 	;

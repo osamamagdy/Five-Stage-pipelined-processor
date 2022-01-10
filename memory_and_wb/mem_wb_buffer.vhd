@@ -24,13 +24,13 @@ ENTITY
 	-- INPUT[3]-> ret: in std_logic;
 	-- rd address: the destination register, to enter the forwarding unit
 	-- INPUT[2:0]-> rd_address_output: in std_logic_vector(2 downto 0);
-	input: IN std_logic_vector( 55 downto 0 );
-    output : OUT std_logic_vector( 55 downto 0 ));
+	input: IN std_logic_vector( 57 downto 0 );
+    output : OUT std_logic_vector( 57 downto 0 ));
 END mem_wb_buffer;
 
 ARCHITECTURE
     arch_mem_wb_buffer OF mem_wb_buffer IS
-	SIGNAL q: std_logic_vector( 55 downto 0 );
+	SIGNAL q: std_logic_vector( 57 downto 0 );
 	
 	BEGIN
 		output<= q;
