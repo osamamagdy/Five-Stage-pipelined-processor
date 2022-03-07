@@ -59,7 +59,7 @@ ModelSim was used to simulate the execution of the program.
 ![The schematic of the processor](schematic.png)
 [Detailed schematic](https://drive.google.com/file/d/1iBBQ6E4CjrZrjdT-gj4shGPR1jhqU3IO/view?usp=sharing)
 
-[Signals truth table](https://docs.google.com/document/d/1XTrNFpkQaoPOy60EUjnpu_0UUMmDfLx1/edit?usp=sharing&ouid=102947852615711193466&rtpof=true&sd=true)
+[Signals truth table](https://docs.google.com/spreadsheets/d/10JTN7SYDUG5t_YWDN4tQaWZyMFFzKcqp/edit?usp=sharing&ouid=102947852615711193466&rtpof=true&sd=true)
 
 [Instruction formats and OpCodes](https://docs.google.com/document/d/1XTrNFpkQaoPOy60EUjnpu_0UUMmDfLx1/edit?usp=sharing&ouid=102947852615711193466&rtpof=true&sd=true)
 
